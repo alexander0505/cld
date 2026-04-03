@@ -1,0 +1,73 @@
+# === Flutter / Dart ===
+.dart_tool/
+.packages
+.pub/
+build/
+flutter_*.png
+
+# Generated files
+*.g.dart
+*.freezed.dart
+
+# === IDE ===
+.idea/
+.vscode/
+*.iml
+
+# === Android ===
+android/.gradle/
+android/app/build/
+android/local.properties
+android/**/GeneratedPluginRegistrant.java
+
+# === iOS ===
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Runner/GeneratedPluginRegistrant.*
+
+# === macOS ===
+macos/Pods/
+macos/Flutter/ephemeral/
+
+# === Linux ===
+linux/flutter/ephemeral/
+
+# === Windows ===
+windows/flutter/ephemeral/
+
+# === Web ===
+build/web/
+
+# === Misc ===
+.DS_Store
+*.log
+*.tmp
+*.swp
+
+# === Secrets / local ===
+*.keystore
+*.jks
+key.properties
+
+# === Coverage ===
+coverage/
+
+# === Fastlane (если добавишь позже) ===
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+
+# === Firebase / env (если будет) ===
+*.env
+.env.*
+
+# === Xcode ===
+xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+
+# === Crashlytics / symbols ===
+*.dSYM
