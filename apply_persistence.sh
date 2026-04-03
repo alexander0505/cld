@@ -1,3 +1,126 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cat > pubspec.yaml <<'EOF'
+name: hello_flutter
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.5.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+EOF
+
+mkdir -p lib/features/counters/data
+
+cat > lib/features/counters/data/counters_storage.dart <<'EOF'
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/counter_item.dart';
+
+class CountersStorage {
+  static const _storageKey = 'counters';
+
+  Future<List<CounterItem>> loadCounters() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_storageKey);
+
+    if (raw == null || raw.isEmpty) {
+      return [];
+    }
+
+    final decoded = jsonDecode(raw) as List<dynamic>;
+    return decoded
+        .map((item) => CounterItem.fromJson(item as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<void> saveCounters(List<CounterItem> counters) async {
+    final prefs = await SharedPreferences.getInstance();
+    final encoded = jsonEncode(
+      counters.map((item) => item.toJson()).toList(),
+    );
+    await prefs.setString(_storageKey, encoded);
+  }
+}
+EOF
+
+cat > lib/features/counters/models/counter_item.dart <<'EOF'
+class CounterItem {
+  final String id;
+  final String title;
+  final String emoji;
+  final DateTime startAt;
+  final String reason;
+  final String? presetKey;
+
+  CounterItem({
+    required this.id,
+    required this.title,
+    required this.emoji,
+    required this.startAt,
+    required this.reason,
+    this.presetKey,
+  });
+
+  CounterItem copyWith({
+    String? id,
+    String? title,
+    String? emoji,
+    DateTime? startAt,
+    String? reason,
+    String? presetKey,
+  }) {
+    return CounterItem(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      emoji: emoji ?? this.emoji,
+      startAt: startAt ?? this.startAt,
+      reason: reason ?? this.reason,
+      presetKey: presetKey ?? this.presetKey,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'emoji': emoji,
+      'startAt': startAt.toIso8601String(),
+      'reason': reason,
+      'presetKey': presetKey,
+    };
+  }
+
+  factory CounterItem.fromJson(Map<String, dynamic> json) {
+    return CounterItem(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      emoji: json['emoji'] as String,
+      startAt: DateTime.parse(json['startAt'] as String),
+      reason: json['reason'] as String,
+      presetKey: json['presetKey'] as String?,
+    );
+  }
+}
+EOF
+
+cat > lib/features/counters/presentation/screen/counters_list_screen.dart <<'EOF'
 import 'package:flutter/material.dart';
 
 import '../../data/counters_storage.dart';
@@ -176,3 +299,9 @@ class _CountersListScreenState extends State<CountersListScreen> {
     );
   }
 }
+EOF
+
+echo "Done. Now run:"
+echo "  flutter pub get"
+echo "  flutter analyze"
+echo "  flutter run"
