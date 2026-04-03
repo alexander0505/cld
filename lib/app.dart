@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'features/counters/presentation/screens/counters_list_screen.dart';
-import 'features/welcome/presentation/screens/welcome_screen.dart';
+import 'features/counters/presentation/screen/welcome_screen.dart';
 
 class CleanTrackApp extends StatelessWidget {
   const CleanTrackApp({super.key});
