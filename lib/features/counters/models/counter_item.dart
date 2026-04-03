@@ -32,4 +32,26 @@ class CounterItem {
       presetKey: presetKey ?? this.presetKey,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'emoji': emoji,
+      'startAt': startAt.toIso8601String(),
+      'reason': reason,
+      'presetKey': presetKey,
+    };
+  }
+
+  factory CounterItem.fromJson(Map<String, dynamic> json) {
+    return CounterItem(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      emoji: json['emoji'] as String,
+      startAt: DateTime.parse(json['startAt'] as String),
+      reason: json['reason'] as String,
+      presetKey: json['presetKey'] as String?,
+    );
+  }
 }
