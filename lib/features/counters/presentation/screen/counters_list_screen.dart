@@ -15,24 +15,7 @@ class CountersListScreen extends StatefulWidget {
 }
 
 class _CountersListScreenState extends State<CountersListScreen> {
-  final List<CounterItem> _counters = [
-    CounterItem(
-      id: '1',
-      title: 'Алкоголь',
-      emoji: '🍷',
-      startAt: DateTime.now().subtract(const Duration(days: 12, hours: 4)),
-      reason: 'Хочу лучше себя чувствовать',
-      presetKey: 'alcohol',
-    ),
-    CounterItem(
-      id: '2',
-      title: 'Сахар',
-      emoji: '🍰',
-      startAt: DateTime.now().subtract(const Duration(hours: 18, minutes: 20)),
-      reason: 'Хочу меньше скачков энергии',
-      presetKey: 'sugar',
-    ),
-  ];
+  final List<CounterItem> _counters = [];
 
   void _addCounter(CounterItem item) {
     setState(() {
@@ -134,7 +117,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
                     const Icon(Icons.spa, size: 64),
                     const SizedBox(height: 16),
                     const Text(
-                      'Добавь первый счетчик',
+                      'Пока нет активных счетчиков',
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w700,
@@ -142,7 +125,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Начни с одной привычки и отслеживай свой прогресс.',
+                      'Создай первый счетчик и начни отслеживать прогресс с сегодняшнего дня.',
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20),

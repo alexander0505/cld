@@ -29,15 +29,19 @@ class WelcomeScreen extends StatelessWidget {
             const Text(
               'Clean Track',
               style: TextStyle(
-                fontSize: 32,
+                fontSize: 34,
                 fontWeight: FontWeight.w800,
+                letterSpacing: -0.5,
               ),
             ),
             const SizedBox(height: 12),
             const Text(
-              'Отслеживай свой прогресс\nи избавляйся от зависимостей',
+              'Следи за прогрессом, сохраняй мотивацию\nи начинай заново без лишнего шума.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(
+                fontSize: 16,
+                height: 1.4,
+              ),
             ),
             const Spacer(),
             SizedBox(

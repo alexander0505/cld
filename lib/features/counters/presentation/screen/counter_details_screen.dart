@@ -153,7 +153,7 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
                 child: Column(
                   children: [
                     const Text(
-                      'Текущий streak',
+                      'Текущий результат',
                       style: TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 12),
@@ -200,7 +200,7 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
             FilledButton.icon(
               onPressed: _confirmReset,
               icon: const Icon(Icons.refresh),
-              label: const Text('Сбросить счетчик'),
+              label: const Text('Начать заново'),
             ),
           ],
         ),
