@@ -1,3 +1,8 @@
+
+#!/usr/bin/env bash
+set -euo pipefail
+
+cat > lib/features/counters/presentation/widgets/counter_card.dart <<'EOF'
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -141,3 +146,8 @@ class _CounterCardState extends State<CounterCard> {
     );
   }
 }
+EOF
+
+echo "Done. Now run:"
+echo "  flutter analyze"
+echo "  flutter run"
