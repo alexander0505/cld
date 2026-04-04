@@ -99,9 +99,9 @@ class _CounterCardState extends State<CounterCard> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
-        color: Colors.white.withValues(alpha: 0.08),
+        color: Colors.white.withValues(alpha: 0.82),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.10),
+          color: const Color(0xFFE6ECE6),
         ),
       ),
       child: Material(
@@ -119,7 +119,7 @@ class _CounterCardState extends State<CounterCard> {
                   child: IconButton(
                     onPressed: widget.onTap,
                     icon: const Icon(Icons.more_horiz),
-                    color: Colors.white.withValues(alpha: 0.9),
+                    color: const Color(0xFF55615A),
                   ),
                 ),
                 const Spacer(),
@@ -129,14 +129,13 @@ class _CounterCardState extends State<CounterCard> {
                   style: const TextStyle(fontSize: 72),
                 ),
                 const SizedBox(height: 20),
-                const SizedBox(height: 20),
                 Text(
                   widget.item.title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w800,
-                    color: Colors.white,
+                    color: Color(0xFF22322B),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -146,9 +145,9 @@ class _CounterCardState extends State<CounterCard> {
                   child: Text(
                     displayValue,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 36,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Color(0xFF1FA971),
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -158,8 +157,8 @@ class _CounterCardState extends State<CounterCard> {
                   Text(
                     widget.item.reason,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.78),
+                    style: const TextStyle(
+                      color: Color(0xFF5E6D65),
                       fontSize: 16,
                       height: 1.4,
                     ),

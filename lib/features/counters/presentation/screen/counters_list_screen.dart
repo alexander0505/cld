@@ -153,36 +153,47 @@ class _CountersListScreenState extends State<CountersListScreen> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF0A1513),
-            Color(0xFF0E1B18),
-            Color(0xFF111F1A),
-            Color(0xFF08110F),
+            Color(0xFFF7F8F3),
+            Color(0xFFF0F5EF),
+            Color(0xFFF8F4EE),
           ],
         ),
       ),
       child: Stack(
         children: [
           Positioned(
-            top: -120,
-            left: -80,
+            top: -80,
+            left: -50,
             child: Container(
-              width: 280,
-              height: 280,
+              width: 240,
+              height: 240,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFF2BE4A6).withValues(alpha: 0.12),
+                color: const Color(0xFFBEE8D6).withValues(alpha: 0.32),
               ),
             ),
           ),
           Positioned(
-            bottom: -140,
-            right: -100,
+            bottom: -100,
+            right: -70,
             child: Container(
-              width: 320,
-              height: 320,
+              width: 260,
+              height: 260,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFF5CE1E6).withValues(alpha: 0.08),
+                color: const Color(0xFFF0E5D8).withValues(alpha: 0.45),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 220,
+            right: -40,
+            child: Container(
+              width: 180,
+              height: 180,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFFDCEAE7).withValues(alpha: 0.35),
               ),
             ),
           ),
@@ -198,9 +209,9 @@ class _CountersListScreenState extends State<CountersListScreen> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32),
-          color: Colors.white.withValues(alpha: 0.06),
+          color: Colors.white.withValues(alpha: 0.74),
           border: Border.all(
-            color: Colors.white.withValues(alpha: 0.10),
+            color: const Color(0xFFE6ECE6),
           ),
         ),
         child: Material(
@@ -213,10 +224,10 @@ class _CountersListScreenState extends State<CountersListScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.add_circle_outline,
                     size: 72,
-                    color: Colors.white.withValues(alpha: 0.92),
+                    color: Color(0xFF55615A),
                   ),
                   const SizedBox(height: 20),
                   const Text(
@@ -225,15 +236,15 @@ class _CountersListScreenState extends State<CountersListScreen> {
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w800,
-                      color: Colors.white,
+                      color: Color(0xFF22322B),
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Text(
+                  const Text(
                     'Свайпни дальше или нажми здесь, чтобы добавить новую привычку.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.72),
+                      color: Color(0xFF5E6D65),
                     ),
                   ),
                 ],
@@ -251,9 +262,9 @@ class _CountersListScreenState extends State<CountersListScreen> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32),
-          color: Colors.white.withValues(alpha: 0.06),
+          color: Colors.white.withValues(alpha: 0.74),
           border: Border.all(
-            color: Colors.white.withValues(alpha: 0.10),
+            color: const Color(0xFFE6ECE6),
           ),
         ),
         child: Material(
@@ -266,10 +277,10 @@ class _CountersListScreenState extends State<CountersListScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.spa,
                     size: 72,
-                    color: Colors.white.withValues(alpha: 0.92),
+                    color: Color(0xFF55615A),
                   ),
                   const SizedBox(height: 20),
                   const Text(
@@ -278,15 +289,15 @@ class _CountersListScreenState extends State<CountersListScreen> {
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w800,
-                      color: Colors.white,
+                      color: Color(0xFF22322B),
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Text(
+                  const Text(
                     'Начни отслеживать прогресс с сегодняшнего дня.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.72),
+                      color: Color(0xFF5E6D65),
                     ),
                   ),
                 ],
@@ -302,7 +313,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       return Scaffold(
-        backgroundColor: const Color(0xFF0A1513),
+        backgroundColor: const Color(0xFFF7F8F3),
         body: _buildMeditativeBackground(
           child: const Center(
             child: CircularProgressIndicator(),
@@ -315,15 +326,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
     final totalPages = hasItems ? _counters.length + 1 : 1;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0A1513),
-      appBar: AppBar(
-        title: const Text('Clean Track'),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.white,
-        elevation: 0,
-      ),
-      extendBodyBehindAppBar: true,
+      backgroundColor: const Color(0xFFF7F8F3),
       body: _buildMeditativeBackground(
         child: SafeArea(
           child: hasItems
@@ -368,8 +371,8 @@ class _CountersListScreenState extends State<CountersListScreen> {
                             height: 8,
                             decoration: BoxDecoration(
                               color: isActive
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Colors.white.withValues(alpha: 0.22),
+                                  ? const Color(0xFF1FA971)
+                                  : const Color(0xFF1FA971).withValues(alpha: 0.18),
                               borderRadius: BorderRadius.circular(999),
                             ),
                           );
