@@ -146,38 +146,98 @@ class _CountersListScreenState extends State<CountersListScreen> {
     setState(() {});
   }
 
+  Widget _buildMeditativeBackground({required Widget child}) {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFF0A1513),
+            Color(0xFF0E1B18),
+            Color(0xFF111F1A),
+            Color(0xFF08110F),
+          ],
+        ),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            top: -120,
+            left: -80,
+            child: Container(
+              width: 280,
+              height: 280,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFF2BE4A6).withValues(alpha: 0.12),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -140,
+            right: -100,
+            child: Container(
+              width: 320,
+              height: 320,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFF5CE1E6).withValues(alpha: 0.08),
+              ),
+            ),
+          ),
+          Positioned.fill(child: child),
+        ],
+      ),
+    );
+  }
+
   Widget _buildAddCounterPage() {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(28),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(32),
+          color: Colors.white.withValues(alpha: 0.06),
+          border: Border.all(
+            color: Colors.white.withValues(alpha: 0.10),
+          ),
         ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(28),
-          onTap: _openCreateFlow,
-          child: Padding(
-            padding: const EdgeInsets.all(28),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.add_circle_outline, size: 72),
-                const SizedBox(height: 20),
-                const Text(
-                  'Новый счетчик',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w800,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(32),
+            onTap: _openCreateFlow,
+            child: Padding(
+              padding: const EdgeInsets.all(28),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_circle_outline,
+                    size: 72,
+                    color: Colors.white.withValues(alpha: 0.92),
                   ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Свайпни дальше или нажми здесь, чтобы добавить новую привычку.',
-                  textAlign: TextAlign.center,
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Новый счетчик',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Свайпни дальше или нажми здесь, чтобы добавить новую привычку.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.72),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -188,35 +248,49 @@ class _CountersListScreenState extends State<CountersListScreen> {
   Widget _buildEmptyState() {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(28),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(32),
+          color: Colors.white.withValues(alpha: 0.06),
+          border: Border.all(
+            color: Colors.white.withValues(alpha: 0.10),
+          ),
         ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(28),
-          onTap: _openCreateFlow,
-          child: Padding(
-            padding: const EdgeInsets.all(28),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.spa, size: 72),
-                const SizedBox(height: 20),
-                const Text(
-                  'Создай первый счетчик',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w800,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(32),
+            onTap: _openCreateFlow,
+            child: Padding(
+              padding: const EdgeInsets.all(28),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.spa,
+                    size: 72,
+                    color: Colors.white.withValues(alpha: 0.92),
                   ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Начни отслеживать прогресс с сегодняшнего дня.',
-                  textAlign: TextAlign.center,
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Создай первый счетчик',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Начни отслеживать прогресс с сегодняшнего дня.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.72),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -227,9 +301,12 @@ class _CountersListScreenState extends State<CountersListScreen> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
+      return Scaffold(
+        backgroundColor: const Color(0xFF0A1513),
+        body: _buildMeditativeBackground(
+          child: const Center(
+            child: CircularProgressIndicator(),
+          ),
         ),
       );
     }
@@ -238,66 +315,71 @@ class _CountersListScreenState extends State<CountersListScreen> {
     final totalPages = hasItems ? _counters.length + 1 : 1;
 
     return Scaffold(
+      backgroundColor: const Color(0xFF0A1513),
       appBar: AppBar(
         title: const Text('Clean Track'),
         centerTitle: true,
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.white,
+        elevation: 0,
       ),
-      body: SafeArea(
-        child: hasItems
-            ? Column(
-                children: [
-                  const SizedBox(height: 8),
-                  Expanded(
-                    child: PageView.builder(
-                      controller: _pageController,
-                      onPageChanged: (index) {
-                        setState(() {
-                          _currentPage = index;
-                        });
-                      },
-                      itemCount: totalPages,
-                      itemBuilder: (context, index) {
-                        if (index == _counters.length) {
-                          return _buildAddCounterPage();
-                        }
+      extendBodyBehindAppBar: true,
+      body: _buildMeditativeBackground(
+        child: SafeArea(
+          child: hasItems
+              ? Column(
+                  children: [
+                    const SizedBox(height: 8),
+                    Expanded(
+                      child: PageView.builder(
+                        controller: _pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentPage = index;
+                          });
+                        },
+                        itemCount: totalPages,
+                        itemBuilder: (context, index) {
+                          if (index == _counters.length) {
+                            return _buildAddCounterPage();
+                          }
 
-                        final item = _counters[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: CounterCard(
-                            item: item,
-                            onTap: () => _openDetails(item),
-                          ),
-                        );
-                      },
+                          final item = _counters[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: CounterCard(
+                              item: item,
+                              onTap: () => _openDetails(item),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(totalPages, (index) {
-                        final isActive = index == _currentPage;
-                        return AnimatedContainer(
-                          duration: const Duration(milliseconds: 180),
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          width: isActive ? 20 : 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            color: isActive
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(
-                                    context,
-                                  ).colorScheme.primary.withValues(alpha: 0.25),
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                        );
-                      }),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(totalPages, (index) {
+                          final isActive = index == _currentPage;
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 180),
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                            width: isActive ? 20 : 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: isActive
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Colors.white.withValues(alpha: 0.22),
+                              borderRadius: BorderRadius.circular(999),
+                            ),
+                          );
+                        }),
+                      ),
                     ),
-                  ),
-                ],
-              )
-            : _buildEmptyState(),
+                  ],
+                )
+              : _buildEmptyState(),
+        ),
       ),
     );
   }

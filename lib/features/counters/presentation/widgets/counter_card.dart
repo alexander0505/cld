@@ -79,7 +79,7 @@ class _CounterCardState extends State<CounterCard> {
         final month = startAt.month.toString().padLeft(2, '0');
         final year = startAt.year;
         return '$day.$month.$year';
-        
+
       case CounterCardDisplayMode.hoursMinutes:
         final diff = DateTime.now().difference(widget.item.startAt);
         final hours = diff.inHours;
@@ -96,64 +96,77 @@ class _CounterCardState extends State<CounterCard> {
   Widget build(BuildContext context) {
     final displayValue = _buildDisplayValue();
 
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(28),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(32),
+        color: Colors.white.withValues(alpha: 0.08),
+        border: Border.all(
+          color: Colors.white.withValues(alpha: 0.10),
+        ),
       ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(28),
-        onTap: widget.onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: IconButton(
-                  onPressed: widget.onTap,
-                  icon: const Icon(Icons.more_horiz),
-                ),
-              ),
-              const Spacer(),
-              Text(
-                widget.item.emoji,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 72),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                widget.item.title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: _switchDisplayMode,
-                child: Text(
-                  displayValue,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 36,
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.w800,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(32),
+          onTap: widget.onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(28),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    onPressed: widget.onTap,
+                    icon: const Icon(Icons.more_horiz),
+                    color: Colors.white.withValues(alpha: 0.9),
                   ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              if (widget.item.reason.isNotEmpty)
+                const Spacer(),
                 Text(
-                  widget.item.reason,
+                  widget.item.emoji,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: const TextStyle(fontSize: 72),
                 ),
-              const Spacer(),
-            ],
+                const SizedBox(height: 20),
+                const SizedBox(height: 20),
+                Text(
+                  widget.item.title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: _switchDisplayMode,
+                  child: Text(
+                    displayValue,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 36,
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                if (widget.item.reason.isNotEmpty)
+                  Text(
+                    widget.item.reason,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.78),
+                      fontSize: 16,
+                      height: 1.4,
+                    ),
+                  ),
+                const Spacer(),
+              ],
+            ),
           ),
         ),
       ),
