@@ -149,68 +149,25 @@ class _CountersListScreenState extends State<CountersListScreen> {
   Widget _buildMeditativeBackground({required Widget child}) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFF7FAFB),
-            Color(0xFFF1F7F5),
-            Color(0xFFF7F5EF),
-          ],
+        image: DecorationImage(
+          image: AssetImage('assets/images/ocean_bg.png'),
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
         ),
       ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: -120,
-            left: -60,
-            child: Container(
-              width: 360,
-              height: 180,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(999),
-                color: const Color(0xFFD8EEE7).withValues(alpha: 0.55),
-              ),
-            ),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.white.withValues(alpha: 0.08),
+              Colors.white.withValues(alpha: 0.14),
+              Colors.white.withValues(alpha: 0.10),
+            ],
           ),
-          Positioned(
-            top: 120,
-            right: -80,
-            child: Container(
-              width: 420,
-              height: 170,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(999),
-                color: const Color(0xFFE6F3EE).withValues(alpha: 0.75),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 140,
-            left: -90,
-            child: Container(
-              width: 400,
-              height: 160,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(999),
-                color: const Color(0xFFF1ECE3).withValues(alpha: 0.80),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: -70,
-            right: -100,
-            child: Container(
-              width: 420,
-              height: 190,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(999),
-                color: const Color(0xFFDDEDE6).withValues(alpha: 0.65),
-              ),
-            ),
-          ),
-          Positioned.fill(child: child),
-        ],
+        ),
+        child: child,
       ),
     );
   }
