@@ -5,6 +5,13 @@ import 'package:flutter/material.dart';
 import '../../models/counter_item.dart';
 import '../../utils/date_formatters.dart';
 
+enum CounterCardDisplayMode {
+  seconds,
+  startDate,
+  hoursMinutes,
+  days,
+}
+
 class CounterCard extends StatefulWidget {
   final CounterItem item;
   final VoidCallback onTap;
@@ -21,14 +28,13 @@ class CounterCard extends StatefulWidget {
 
 class _CounterCardState extends State<CounterCard> {
   late Timer _timer;
-  CounterTimeDisplayMode _displayMode = CounterTimeDisplayMode.seconds;
-  bool _showStartAt = false;
+  CounterCardDisplayMode _displayMode = CounterCardDisplayMode.seconds;
 
   @override
   void initState() {
     super.initState();
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (mounted) {
+      if (mounted && _displayMode != CounterCardDisplayMode.startDate) {
         setState(() {});
       }
     });
@@ -43,27 +49,48 @@ class _CounterCardState extends State<CounterCard> {
   void _switchDisplayMode() {
     setState(() {
       switch (_displayMode) {
-        case CounterTimeDisplayMode.seconds:
-          _displayMode = CounterTimeDisplayMode.mixed;
+        case CounterCardDisplayMode.seconds:
+          _displayMode = CounterCardDisplayMode.startDate;
           break;
-        case CounterTimeDisplayMode.mixed:
-          _displayMode = CounterTimeDisplayMode.days;
+        case CounterCardDisplayMode.startDate:
+          _displayMode = CounterCardDisplayMode.hoursMinutes;
           break;
-        case CounterTimeDisplayMode.days:
-          _displayMode = CounterTimeDisplayMode.seconds;
+        case CounterCardDisplayMode.hoursMinutes:
+          _displayMode = CounterCardDisplayMode.days;
+          break;
+        case CounterCardDisplayMode.days:
+          _displayMode = CounterCardDisplayMode.seconds;
           break;
       }
-
-      _showStartAt = !_showStartAt;
     });
+  }
+
+  String _buildDisplayValue() {
+    switch (_displayMode) {
+      case CounterCardDisplayMode.seconds:
+        return formatElapsed(
+          widget.item.startAt,
+          mode: CounterTimeDisplayMode.seconds,
+        );
+
+      case CounterCardDisplayMode.startDate:
+        return formatDateTime(widget.item.startAt);
+
+      case CounterCardDisplayMode.hoursMinutes:
+        final diff = DateTime.now().difference(widget.item.startAt);
+        final hours = diff.inHours;
+        final minutes = diff.inMinutes % 60;
+        return '$hours ч $minutes мин';
+
+      case CounterCardDisplayMode.days:
+        final diff = DateTime.now().difference(widget.item.startAt);
+        return '${diff.inDays} дн';
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final elapsed = formatElapsed(
-      widget.item.startAt,
-      mode: _displayMode,
-    );
+    final displayValue = _buildDisplayValue();
 
     return Card(
       elevation: 0,
@@ -104,26 +131,14 @@ class _CounterCardState extends State<CounterCard> {
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: _switchDisplayMode,
-                child: Column(
-                  children: [
-                    Text(
-                      elapsed,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 36,
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    if (_showStartAt) ...[
-                      const SizedBox(height: 10),
-                      Text(
-                        formatDateTime(widget.item.startAt),
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
-                  ],
+                child: Text(
+                  displayValue,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 36,
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
