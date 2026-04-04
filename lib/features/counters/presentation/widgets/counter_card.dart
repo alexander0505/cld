@@ -74,8 +74,12 @@ class _CounterCardState extends State<CounterCard> {
         );
 
       case CounterCardDisplayMode.startDate:
-        return formatDateTime(widget.item.startAt);
-
+        final startAt = widget.item.startAt;
+        final day = startAt.day.toString().padLeft(2, '0');
+        final month = startAt.month.toString().padLeft(2, '0');
+        final year = startAt.year;
+        return '$day.$month.$year';
+        
       case CounterCardDisplayMode.hoursMinutes:
         final diff = DateTime.now().difference(widget.item.startAt);
         final hours = diff.inHours;
