@@ -153,47 +153,59 @@ class _CountersListScreenState extends State<CountersListScreen> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFFF8F8F4),
-            Color(0xFFF0F5EF),
-            Color(0xFFF8F4EE),
+            Color(0xFFF7FAFB),
+            Color(0xFFF1F7F5),
+            Color(0xFFF7F5EF),
           ],
         ),
       ),
       child: Stack(
         children: [
           Positioned(
-            top: -60,
-            left: -30,
+            top: -120,
+            left: -60,
             child: Container(
-              width: 220,
-              height: 220,
+              width: 360,
+              height: 180,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color(0xFFC8E8D8).withValues(alpha: 0.34),
+                borderRadius: BorderRadius.circular(999),
+                color: const Color(0xFFD8EEE7).withValues(alpha: 0.55),
               ),
             ),
           ),
           Positioned(
-            top: 230,
-            right: -50,
+            top: 120,
+            right: -80,
             child: Container(
-              width: 170,
+              width: 420,
               height: 170,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color(0xFFDDEAE6).withValues(alpha: 0.32),
+                borderRadius: BorderRadius.circular(999),
+                color: const Color(0xFFE6F3EE).withValues(alpha: 0.75),
               ),
             ),
           ),
           Positioned(
-            bottom: -80,
-            right: -40,
+            bottom: 140,
+            left: -90,
             child: Container(
-              width: 240,
-              height: 240,
+              width: 400,
+              height: 160,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color(0xFFF0E4D7).withValues(alpha: 0.42),
+                borderRadius: BorderRadius.circular(999),
+                color: const Color(0xFFF1ECE3).withValues(alpha: 0.80),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -70,
+            right: -100,
+            child: Container(
+              width: 420,
+              height: 190,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(999),
+                color: const Color(0xFFDDEDE6).withValues(alpha: 0.65),
               ),
             ),
           ),
@@ -315,7 +327,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       return Scaffold(
-        backgroundColor: const Color(0xFFF8F8F4),
+        backgroundColor: const Color(0xFFF7FAFB),
         body: _buildMeditativeBackground(
           child: const Center(
             child: CircularProgressIndicator(),
@@ -328,7 +340,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
     final totalPages = hasItems ? _counters.length + 1 : 1;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F8F4),
+      backgroundColor: const Color(0xFFF7FAFB),
       body: _buildMeditativeBackground(
         child: SafeArea(
           child: hasItems
