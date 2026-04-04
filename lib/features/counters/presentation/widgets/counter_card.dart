@@ -98,19 +98,20 @@ class _CounterCardState extends State<CounterCard> {
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(32),
-        color: Colors.white.withValues(alpha: 0.82),
+        borderRadius: BorderRadius.circular(34),
+        color: Colors.white.withValues(alpha: 0.86),
         border: Border.all(
-          color: const Color(0xFFE6ECE6),
+          color: const Color(0xFFE7ECE6),
+          width: 1,
         ),
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadius.circular(32),
+          borderRadius: BorderRadius.circular(34),
           onTap: widget.onTap,
           child: Padding(
-            padding: const EdgeInsets.all(28),
+            padding: const EdgeInsets.fromLTRB(28, 20, 28, 28),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -119,48 +120,52 @@ class _CounterCardState extends State<CounterCard> {
                   child: IconButton(
                     onPressed: widget.onTap,
                     icon: const Icon(Icons.more_horiz),
-                    color: const Color(0xFF55615A),
+                    color: const Color(0xFF5A675F),
                   ),
                 ),
                 const Spacer(),
                 Text(
                   widget.item.emoji,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 72),
+                  style: const TextStyle(fontSize: 76),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
                 Text(
                   widget.item.title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 30,
+                    fontSize: 32,
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFF22322B),
+                    color: Color(0xFF22312B),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 26),
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: _switchDisplayMode,
-                  child: Text(
-                    displayValue,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 36,
-                      color: Color(0xFF1FA971),
-                      fontWeight: FontWeight.w800,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Text(
+                      displayValue,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 40,
+                        height: 1.1,
+                        color: Color(0xFF24A770),
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 18),
                 if (widget.item.reason.isNotEmpty)
                   Text(
                     widget.item.reason,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: Color(0xFF5E6D65),
+                      color: Color(0xFF607066),
                       fontSize: 16,
-                      height: 1.4,
+                      height: 1.45,
                     ),
                   ),
                 const Spacer(),
