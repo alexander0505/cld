@@ -63,51 +63,74 @@ class _CounterCardState extends State<CounterCard> {
     );
 
     return Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(28),
+      ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(28),
         onTap: widget.onTap,
         child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
+          padding: const EdgeInsets.all(28),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                widget.item.emoji,
-                style: const TextStyle(fontSize: 28),
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.item.title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: _switchDisplayMode,
-                      child: Text(
-                        elapsed,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Старт: ${formatDateTime(widget.item.startAt)}',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ],
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  onPressed: widget.onTap,
+                  icon: const Icon(Icons.more_horiz),
                 ),
               ),
-              const Icon(Icons.chevron_right),
+              const Spacer(),
+              Text(
+                widget.item.emoji,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 72),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                widget.item.title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 20),
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: _switchDisplayMode,
+                child: Text(
+                  elapsed,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 36,
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Нажми на время, чтобы переключить формат',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const SizedBox(height: 18),
+              Text(
+                'Старт: ${formatDateTime(widget.item.startAt)}',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 12),
+              if (widget.item.reason.isNotEmpty)
+                Text(
+                  widget.item.reason,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              const Spacer(),
             ],
           ),
         ),
