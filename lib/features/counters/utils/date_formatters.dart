@@ -1,23 +1,41 @@
-String formatElapsed(DateTime startAt) {
+enum CounterTimeDisplayMode {
+  seconds,
+  mixed,
+  days,
+}
+
+String formatElapsed(
+  DateTime startAt, {
+  CounterTimeDisplayMode mode = CounterTimeDisplayMode.mixed,
+}) {
   final diff = DateTime.now().difference(startAt);
 
-  if (diff.inDays > 0) {
-    final days = diff.inDays;
-    final hours = diff.inHours % 24;
-    return '$days дн $hours ч';
-  }
+  switch (mode) {
+    case CounterTimeDisplayMode.seconds:
+      return '${diff.inSeconds} сек';
 
-  if (diff.inHours > 0) {
-    final hours = diff.inHours;
-    final minutes = diff.inMinutes % 60;
-    return '$hours ч $minutes мин';
-  }
+    case CounterTimeDisplayMode.days:
+      return '${diff.inDays} дн';
 
-  if (diff.inMinutes > 0) {
-    return '${diff.inMinutes} мин';
-  }
+    case CounterTimeDisplayMode.mixed:
+      if (diff.inDays > 0) {
+        final days = diff.inDays;
+        final hours = diff.inHours % 24;
+        return '$days дн $hours ч';
+      }
 
-  return '${diff.inSeconds} сек';
+      if (diff.inHours > 0) {
+        final hours = diff.inHours;
+        final minutes = diff.inMinutes % 60;
+        return '$hours ч $minutes мин';
+      }
+
+      if (diff.inMinutes > 0) {
+        return '${diff.inMinutes} мин ${diff.inSeconds % 60} сек';
+      }
+
+      return '${diff.inSeconds} сек';
+  }
 }
 
 String formatDateTime(DateTime dateTime) {
