@@ -99,11 +99,7 @@ class _CounterCardState extends State<CounterCard> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(34),
-        color: Colors.white.withValues(alpha: 0.86),
-        border: Border.all(
-          color: const Color(0xFFE7ECE6),
-          width: 1,
-        ),
+        color: Colors.white.withValues(alpha: 0.18),
       ),
       child: Material(
         color: Colors.transparent,
@@ -120,7 +116,7 @@ class _CounterCardState extends State<CounterCard> {
                   child: IconButton(
                     onPressed: widget.onTap,
                     icon: const Icon(Icons.more_horiz),
-                    color: const Color(0xFF5A675F),
+                    color: const Color(0xFF4E5C56),
                   ),
                 ),
                 const Spacer(),
@@ -136,7 +132,7 @@ class _CounterCardState extends State<CounterCard> {
                   style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFF22312B),
+                    color: Color(0xFF213029),
                   ),
                 ),
                 const SizedBox(height: 26),
@@ -163,7 +159,7 @@ class _CounterCardState extends State<CounterCard> {
                     widget.item.reason,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: Color(0xFF607066),
+                      color: Color(0xFF5E6D65),
                       fontSize: 16,
                       height: 1.45,
                     ),
