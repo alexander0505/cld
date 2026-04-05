@@ -27,5 +27,16 @@
   "formStartPointTitle": "Starting point",
   "formWhyTitle": "Why this matters",
   "formCustomReasonLabel": "Your reason",
-  "formCustomReasonHint": "Why do you want to begin right now?"
+  "formCustomReasonHint": "Why do you want to begin right now?",
+  "detailsStartDateTitle": "Start date",
+  "detailsReasonTitle": "Reason",
+  "detailsReasonEmpty": "No reason specified",
+  "detailsResetAction": "Start over",
+  "detailsDeleteAction": "Delete habit",
+  "detailsResetDialogTitle": "Start over?",
+  "detailsResetDialogBody": "Your current progress will begin again from this moment.",
+  "detailsDeleteDialogTitle": "Delete habit?",
+  "detailsDeleteDialogBody": "This action cannot be undone.",
+  "commonCancel": "Cancel",
+  "commonDelete": "Delete"
 }

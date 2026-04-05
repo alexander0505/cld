@@ -265,6 +265,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Why do you want to begin right now?'**
   String get formCustomReasonHint;
+
+  /// No description provided for @detailsStartDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start date'**
+  String get detailsStartDateTitle;
+
+  /// No description provided for @detailsReasonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get detailsReasonTitle;
+
+  /// No description provided for @detailsReasonEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No reason specified'**
+  String get detailsReasonEmpty;
+
+  /// No description provided for @detailsResetAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Start over'**
+  String get detailsResetAction;
+
+  /// No description provided for @detailsDeleteAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete habit'**
+  String get detailsDeleteAction;
+
+  /// No description provided for @detailsResetDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start over?'**
+  String get detailsResetDialogTitle;
+
+  /// No description provided for @detailsResetDialogBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your current progress will begin again from this moment.'**
+  String get detailsResetDialogBody;
+
+  /// No description provided for @detailsDeleteDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete habit?'**
+  String get detailsDeleteDialogTitle;
+
+  /// No description provided for @detailsDeleteDialogBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone.'**
+  String get detailsDeleteDialogBody;
+
+  /// No description provided for @commonCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get commonCancel;
+
+  /// No description provided for @commonDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get commonDelete;
 }
 
 class _AppLocalizationsDelegate

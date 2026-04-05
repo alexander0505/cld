@@ -98,4 +98,38 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get formCustomReasonHint =>
       'Почему тебе хочется начать именно сейчас?';
+
+  @override
+  String get detailsStartDateTitle => 'Дата начала';
+
+  @override
+  String get detailsReasonTitle => 'Причина';
+
+  @override
+  String get detailsReasonEmpty => 'Причина не указана';
+
+  @override
+  String get detailsResetAction => 'Начать заново';
+
+  @override
+  String get detailsDeleteAction => 'Удалить привычку';
+
+  @override
+  String get detailsResetDialogTitle => 'Начать заново?';
+
+  @override
+  String get detailsResetDialogBody =>
+      'Текущий прогресс начнётся заново с текущего момента.';
+
+  @override
+  String get detailsDeleteDialogTitle => 'Удалить привычку?';
+
+  @override
+  String get detailsDeleteDialogBody => 'Это действие нельзя отменить.';
+
+  @override
+  String get commonCancel => 'Отмена';
+
+  @override
+  String get commonDelete => 'Удалить';
 }

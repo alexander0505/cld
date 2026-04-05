@@ -97,4 +97,38 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get formCustomReasonHint => 'Why do you want to begin right now?';
+
+  @override
+  String get detailsStartDateTitle => 'Start date';
+
+  @override
+  String get detailsReasonTitle => 'Reason';
+
+  @override
+  String get detailsReasonEmpty => 'No reason specified';
+
+  @override
+  String get detailsResetAction => 'Start over';
+
+  @override
+  String get detailsDeleteAction => 'Delete habit';
+
+  @override
+  String get detailsResetDialogTitle => 'Start over?';
+
+  @override
+  String get detailsResetDialogBody =>
+      'Your current progress will begin again from this moment.';
+
+  @override
+  String get detailsDeleteDialogTitle => 'Delete habit?';
+
+  @override
+  String get detailsDeleteDialogBody => 'This action cannot be undone.';
+
+  @override
+  String get commonCancel => 'Cancel';
+
+  @override
+  String get commonDelete => 'Delete';
 }

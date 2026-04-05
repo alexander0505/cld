@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/l10n/l10n.dart';
 import '../../data/habit_presets.dart';
 import '../../models/counter_item.dart';
 import '../../utils/date_formatters.dart';
@@ -54,21 +55,21 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
   }
 
   Future<void> _confirmReset() async {
+    final l10n = context.l10n;
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Начать заново?'),
-        content: const Text(
-          'Текущий прогресс начнётся заново с текущего момента.',
-        ),
+        title: Text(l10n.detailsResetDialogTitle),
+        content: Text(l10n.detailsResetDialogBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Отмена'),
+            child: Text(l10n.commonCancel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Начать заново'),
+            child: Text(l10n.detailsResetAction),
           ),
         ],
       ),
@@ -83,19 +84,21 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
   }
 
   Future<void> _confirmDelete() async {
+    final l10n = context.l10n;
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Удалить привычку?'),
-        content: const Text('Это действие нельзя отменить.'),
+        title: Text(l10n.detailsDeleteDialogTitle),
+        content: Text(l10n.detailsDeleteDialogBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Отмена'),
+            child: Text(l10n.commonCancel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Удалить'),
+            child: Text(l10n.commonDelete),
           ),
         ],
       ),
@@ -109,6 +112,7 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final elapsed = formatElapsed(_counter.startAt);
 
     return Scaffold(
@@ -182,14 +186,14 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
                   ),
                   const SizedBox(height: 22),
                   _InfoBlock(
-                    title: 'Дата начала',
+                    title: l10n.detailsStartDateTitle,
                     value: formatDateTime(_counter.startAt),
                   ),
                   const SizedBox(height: 14),
                   _InfoBlock(
-                    title: 'Причина',
+                    title: l10n.detailsReasonTitle,
                     value: _counter.reason.isEmpty
-                        ? 'Причина не указана'
+                        ? l10n.detailsReasonEmpty
                         : _counter.reason,
                   ),
                   const Spacer(),
@@ -202,9 +206,9 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
                       ),
                     ),
                     onPressed: _confirmReset,
-                    child: const Text(
-                      'Начать заново',
-                      style: TextStyle(
+                    child: Text(
+                      l10n.detailsResetAction,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                       ),
@@ -216,9 +220,9 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
-                    child: const Text(
-                      'Удалить привычку',
-                      style: TextStyle(
+                    child: Text(
+                      l10n.detailsDeleteAction,
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF9A5A5A),

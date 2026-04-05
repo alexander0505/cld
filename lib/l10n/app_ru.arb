@@ -27,5 +27,16 @@
   "formStartPointTitle": "Точка отсчёта",
   "formWhyTitle": "Почему это важно",
   "formCustomReasonLabel": "Своя причина",
-  "formCustomReasonHint": "Почему тебе хочется начать именно сейчас?"
+  "formCustomReasonHint": "Почему тебе хочется начать именно сейчас?",
+  "detailsStartDateTitle": "Дата начала",
+  "detailsReasonTitle": "Причина",
+  "detailsReasonEmpty": "Причина не указана",
+  "detailsResetAction": "Начать заново",
+  "detailsDeleteAction": "Удалить привычку",
+  "detailsResetDialogTitle": "Начать заново?",
+  "detailsResetDialogBody": "Текущий прогресс начнётся заново с текущего момента.",
+  "detailsDeleteDialogTitle": "Удалить привычку?",
+  "detailsDeleteDialogBody": "Это действие нельзя отменить.",
+  "commonCancel": "Отмена",
+  "commonDelete": "Удалить"
 }
