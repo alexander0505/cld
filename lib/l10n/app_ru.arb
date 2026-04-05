@@ -12,5 +12,20 @@
   "habitPickerSubtitle": "Выбери, с чего хочешь начать. Можно взять готовый вариант или создать свой.",
   "habitPickerAllUsedSubtitle": "Все готовые привычки уже выбраны. Можно создать свой вариант.",
   "customHabitTitle": "Своя привычка",
-  "customHabitSubtitle": "Создай свой вариант вручную"
+  "customHabitSubtitle": "Создай свой вариант вручную",
+  "formEditTitle": "Изменить привычку",
+  "formCreateTitle": "Новая привычка",
+  "formSubtitle": "Настрой начало так, как тебе удобно.",
+  "formActionSave": "Сохранить изменения",
+  "formActionStart": "Начать отсчёт",
+  "formCustomHabitBlockTitle": "Твоя привычка",
+  "formHabitNameLabel": "Название привычки",
+  "formHabitNameHint": "Например: Алкоголь",
+  "formHabitNameValidation": "Укажи название привычки",
+  "formEmojiLabel": "Эмодзи",
+  "formEmojiHint": "Например: 🚭",
+  "formStartPointTitle": "Точка отсчёта",
+  "formWhyTitle": "Почему это важно",
+  "formCustomReasonLabel": "Своя причина",
+  "formCustomReasonHint": "Почему тебе хочется начать именно сейчас?"
 }

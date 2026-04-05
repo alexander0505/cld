@@ -52,4 +52,50 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get customHabitSubtitle => 'Создай свой вариант вручную';
+
+  @override
+  String get formEditTitle => 'Изменить привычку';
+
+  @override
+  String get formCreateTitle => 'Новая привычка';
+
+  @override
+  String get formSubtitle => 'Настрой начало так, как тебе удобно.';
+
+  @override
+  String get formActionSave => 'Сохранить изменения';
+
+  @override
+  String get formActionStart => 'Начать отсчёт';
+
+  @override
+  String get formCustomHabitBlockTitle => 'Твоя привычка';
+
+  @override
+  String get formHabitNameLabel => 'Название привычки';
+
+  @override
+  String get formHabitNameHint => 'Например: Алкоголь';
+
+  @override
+  String get formHabitNameValidation => 'Укажи название привычки';
+
+  @override
+  String get formEmojiLabel => 'Эмодзи';
+
+  @override
+  String get formEmojiHint => 'Например: 🚭';
+
+  @override
+  String get formStartPointTitle => 'Точка отсчёта';
+
+  @override
+  String get formWhyTitle => 'Почему это важно';
+
+  @override
+  String get formCustomReasonLabel => 'Своя причина';
+
+  @override
+  String get formCustomReasonHint =>
+      'Почему тебе хочется начать именно сейчас?';
 }

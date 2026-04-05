@@ -51,4 +51,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get customHabitSubtitle => 'Create your own option manually';
+
+  @override
+  String get formEditTitle => 'Edit habit';
+
+  @override
+  String get formCreateTitle => 'New habit';
+
+  @override
+  String get formSubtitle =>
+      'Set the beginning in the way that feels right for you.';
+
+  @override
+  String get formActionSave => 'Save changes';
+
+  @override
+  String get formActionStart => 'Start tracking';
+
+  @override
+  String get formCustomHabitBlockTitle => 'Your habit';
+
+  @override
+  String get formHabitNameLabel => 'Habit name';
+
+  @override
+  String get formHabitNameHint => 'For example: Alcohol';
+
+  @override
+  String get formHabitNameValidation => 'Enter a habit name';
+
+  @override
+  String get formEmojiLabel => 'Emoji';
+
+  @override
+  String get formEmojiHint => 'For example: 🚭';
+
+  @override
+  String get formStartPointTitle => 'Starting point';
+
+  @override
+  String get formWhyTitle => 'Why this matters';
+
+  @override
+  String get formCustomReasonLabel => 'Your reason';
+
+  @override
+  String get formCustomReasonHint => 'Why do you want to begin right now?';
 }

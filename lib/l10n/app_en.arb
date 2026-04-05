@@ -12,5 +12,20 @@
   "habitPickerSubtitle": "Choose where you'd like to begin. You can pick a ready-made option or create your own.",
   "habitPickerAllUsedSubtitle": "All ready-made habits have already been added. You can create your own.",
   "customHabitTitle": "Custom habit",
-  "customHabitSubtitle": "Create your own option manually"
+  "customHabitSubtitle": "Create your own option manually",
+  "formEditTitle": "Edit habit",
+  "formCreateTitle": "New habit",
+  "formSubtitle": "Set the beginning in the way that feels right for you.",
+  "formActionSave": "Save changes",
+  "formActionStart": "Start tracking",
+  "formCustomHabitBlockTitle": "Your habit",
+  "formHabitNameLabel": "Habit name",
+  "formHabitNameHint": "For example: Alcohol",
+  "formHabitNameValidation": "Enter a habit name",
+  "formEmojiLabel": "Emoji",
+  "formEmojiHint": "For example: 🚭",
+  "formStartPointTitle": "Starting point",
+  "formWhyTitle": "Why this matters",
+  "formCustomReasonLabel": "Your reason",
+  "formCustomReasonHint": "Why do you want to begin right now?"
 }

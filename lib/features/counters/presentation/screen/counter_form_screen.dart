@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/l10n/l10n.dart';
 import '../../models/counter_item.dart';
 import '../../models/habit_preset.dart';
 import '../../utils/date_formatters.dart';
@@ -120,8 +121,9 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final titleText = isEdit ? 'Изменить привычку' : 'Новая привычка';
-    final actionText = isEdit ? 'Сохранить изменения' : 'Начать отсчёт';
+    final l10n = context.l10n;
+    final titleText = isEdit ? l10n.formEditTitle : l10n.formCreateTitle;
+    final actionText = isEdit ? l10n.formActionSave : l10n.formActionStart;
 
     return Scaffold(
       body: Container(
@@ -171,10 +173,10 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const Text(
-                    'Настрой начало так, как тебе удобно.',
+                  Text(
+                    l10n.formSubtitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       height: 1.45,
                       color: Color(0xFF607066),
@@ -195,9 +197,9 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Твоя привычка',
-                            style: TextStyle(
+                          Text(
+                            l10n.formCustomHabitBlockTitle,
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w700,
                               color: Color(0xFF22312B),
@@ -207,12 +209,12 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                           TextFormField(
                             controller: _titleController,
                             decoration: _inputDecoration(
-                              label: 'Название привычки',
-                              hint: 'Например: Алкоголь',
+                              label: l10n.formHabitNameLabel,
+                              hint: l10n.formHabitNameHint,
                             ),
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
-                                return 'Укажи название привычки';
+                                return l10n.formHabitNameValidation;
                               }
                               return null;
                             },
@@ -221,8 +223,8 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                           TextFormField(
                             controller: _emojiController,
                             decoration: _inputDecoration(
-                              label: 'Эмодзи',
-                              hint: 'Например: 🚭',
+                              label: l10n.formEmojiLabel,
+                              hint: l10n.formEmojiHint,
                             ),
                           ),
                         ],
@@ -235,9 +237,9 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Точка отсчёта',
-                          style: TextStyle(
+                        Text(
+                          l10n.formStartPointTitle,
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
                             color: Color(0xFF22312B),
@@ -290,9 +292,9 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Почему это важно',
-                          style: TextStyle(
+                        Text(
+                          l10n.formWhyTitle,
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
                             color: Color(0xFF22312B),
@@ -343,8 +345,8 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                           controller: _reasonController,
                           maxLines: 4,
                           decoration: _inputDecoration(
-                            label: 'Своя причина',
-                            hint: 'Почему тебе хочется начать именно сейчас?',
+                            label: l10n.formCustomReasonLabel,
+                            hint: l10n.formCustomReasonHint,
                           ),
                           onChanged: (_) {
                             if (_selectedReason != null) {

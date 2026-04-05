@@ -175,6 +175,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create your own option manually'**
   String get customHabitSubtitle;
+
+  /// No description provided for @formEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit habit'**
+  String get formEditTitle;
+
+  /// No description provided for @formCreateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New habit'**
+  String get formCreateTitle;
+
+  /// No description provided for @formSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set the beginning in the way that feels right for you.'**
+  String get formSubtitle;
+
+  /// No description provided for @formActionSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get formActionSave;
+
+  /// No description provided for @formActionStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start tracking'**
+  String get formActionStart;
+
+  /// No description provided for @formCustomHabitBlockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your habit'**
+  String get formCustomHabitBlockTitle;
+
+  /// No description provided for @formHabitNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Habit name'**
+  String get formHabitNameLabel;
+
+  /// No description provided for @formHabitNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'For example: Alcohol'**
+  String get formHabitNameHint;
+
+  /// No description provided for @formHabitNameValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a habit name'**
+  String get formHabitNameValidation;
+
+  /// No description provided for @formEmojiLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Emoji'**
+  String get formEmojiLabel;
+
+  /// No description provided for @formEmojiHint.
+  ///
+  /// In en, this message translates to:
+  /// **'For example: 🚭'**
+  String get formEmojiHint;
+
+  /// No description provided for @formStartPointTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting point'**
+  String get formStartPointTitle;
+
+  /// No description provided for @formWhyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Why this matters'**
+  String get formWhyTitle;
+
+  /// No description provided for @formCustomReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your reason'**
+  String get formCustomReasonLabel;
+
+  /// No description provided for @formCustomReasonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Why do you want to begin right now?'**
+  String get formCustomReasonHint;
 }
 
 class _AppLocalizationsDelegate
