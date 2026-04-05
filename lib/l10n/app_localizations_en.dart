@@ -17,4 +17,38 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get welcomeSubtitle =>
       'Track your progress calmly and return to yourself without extra noise.';
+
+  @override
+  String get addHabitSceneTitle => 'New habit';
+
+  @override
+  String get addHabitSceneSubtitle =>
+      'Add a new habit and begin a new path at your own pace.';
+
+  @override
+  String get addHabitSceneHint => 'Swipe back to return to your habits.';
+
+  @override
+  String get emptyStateTitle => 'First habit';
+
+  @override
+  String get emptyStateSubtitle =>
+      'Start with one habit and simply watch your progress.';
+
+  @override
+  String get habitPickerTitle => 'Add habit';
+
+  @override
+  String get habitPickerSubtitle =>
+      'Choose where you\'d like to begin. You can pick a ready-made option or create your own.';
+
+  @override
+  String get habitPickerAllUsedSubtitle =>
+      'All ready-made habits have already been added. You can create your own.';
+
+  @override
+  String get customHabitTitle => 'Custom habit';
+
+  @override
+  String get customHabitSubtitle => 'Create your own option manually';
 }

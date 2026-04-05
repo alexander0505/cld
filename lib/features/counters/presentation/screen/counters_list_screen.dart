@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/l10n/l10n.dart';
 import '../../data/counters_storage.dart';
 import '../../models/counter_item.dart';
 import '../../models/habit_preset.dart';
@@ -180,26 +181,28 @@ class _CountersListScreenState extends State<CountersListScreen> {
     );
   }
 
-  Widget _buildAddCounterScene() {
+  Widget _buildAddCounterScene(BuildContext context) {
+    final l10n = context.l10n;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(18, 28, 18, 18),
       child: Column(
         children: [
           const Spacer(),
-          const Text(
-            'Новая привычка',
+          Text(
+            l10n.addHabitSceneTitle,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w800,
               color: Color(0xFF22312B),
             ),
           ),
           const SizedBox(height: 10),
-          const Text(
-            'Добавь новую привычку и начни новый путь в своём ритме.',
+          Text(
+            l10n.addHabitSceneSubtitle,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               height: 1.45,
               color: Color(0xFF607066),
@@ -224,10 +227,10 @@ class _CountersListScreenState extends State<CountersListScreen> {
             ),
           ),
           const SizedBox(height: 24),
-          const Text(
-            'Свайпни назад, чтобы вернуться к своим привычкам.',
+          Text(
+            l10n.addHabitSceneHint,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               height: 1.4,
               color: Color(0xFF748379),
@@ -239,26 +242,28 @@ class _CountersListScreenState extends State<CountersListScreen> {
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(BuildContext context) {
+    final l10n = context.l10n;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(18, 28, 18, 18),
       child: Column(
         children: [
           const Spacer(),
-          const Text(
-            'Первая привычка',
+          Text(
+            l10n.emptyStateTitle,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w800,
               color: Color(0xFF22312B),
             ),
           ),
           const SizedBox(height: 10),
-          const Text(
-            'Начни с одной привычки и просто наблюдай за своим прогрессом.',
+          Text(
+            l10n.emptyStateSubtitle,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               height: 1.45,
               color: Color(0xFF607066),
@@ -323,7 +328,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
                         itemCount: totalPages,
                         itemBuilder: (context, index) {
                           if (index == _counters.length) {
-                            return _buildAddCounterScene();
+                            return _buildAddCounterScene(context);
                           }
 
                           final item = _counters[index];
@@ -360,7 +365,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
                     ),
                   ],
                 )
-              : _buildEmptyState(),
+              : _buildEmptyState(context),
         ),
       ),
     );

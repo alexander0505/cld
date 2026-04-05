@@ -115,6 +115,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Track your progress calmly and return to yourself without extra noise.'**
   String get welcomeSubtitle;
+
+  /// No description provided for @addHabitSceneTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New habit'**
+  String get addHabitSceneTitle;
+
+  /// No description provided for @addHabitSceneSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a new habit and begin a new path at your own pace.'**
+  String get addHabitSceneSubtitle;
+
+  /// No description provided for @addHabitSceneHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe back to return to your habits.'**
+  String get addHabitSceneHint;
+
+  /// No description provided for @emptyStateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'First habit'**
+  String get emptyStateTitle;
+
+  /// No description provided for @emptyStateSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with one habit and simply watch your progress.'**
+  String get emptyStateSubtitle;
+
+  /// No description provided for @habitPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add habit'**
+  String get habitPickerTitle;
+
+  /// No description provided for @habitPickerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose where you\'d like to begin. You can pick a ready-made option or create your own.'**
+  String get habitPickerSubtitle;
+
+  /// No description provided for @habitPickerAllUsedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All ready-made habits have already been added. You can create your own.'**
+  String get habitPickerAllUsedSubtitle;
+
+  /// No description provided for @customHabitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom habit'**
+  String get customHabitTitle;
+
+  /// No description provided for @customHabitSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your own option manually'**
+  String get customHabitSubtitle;
 }
 
 class _AppLocalizationsDelegate

@@ -2,5 +2,15 @@
   "@@locale": "ru",
   "appTitle": "Clean Track",
   "welcomeTitle": "Clean Track",
-  "welcomeSubtitle": "Спокойно наблюдай за своим прогрессом и возвращайся к себе без лишнего шума."
+  "welcomeSubtitle": "Спокойно наблюдай за своим прогрессом и возвращайся к себе без лишнего шума.",
+  "addHabitSceneTitle": "Новая привычка",
+  "addHabitSceneSubtitle": "Добавь новую привычку и начни новый путь в своём ритме.",
+  "addHabitSceneHint": "Свайпни назад, чтобы вернуться к своим привычкам.",
+  "emptyStateTitle": "Первая привычка",
+  "emptyStateSubtitle": "Начни с одной привычки и просто наблюдай за своим прогрессом.",
+  "habitPickerTitle": "Добавить привычку",
+  "habitPickerSubtitle": "Выбери, с чего хочешь начать. Можно взять готовый вариант или создать свой.",
+  "habitPickerAllUsedSubtitle": "Все готовые привычки уже выбраны. Можно создать свой вариант.",
+  "customHabitTitle": "Своя привычка",
+  "customHabitSubtitle": "Создай свой вариант вручную"
 }

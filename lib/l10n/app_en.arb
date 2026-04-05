@@ -2,5 +2,15 @@
   "@@locale": "en",
   "appTitle": "Clean Track",
   "welcomeTitle": "Clean Track",
-  "welcomeSubtitle": "Track your progress calmly and return to yourself without extra noise."
+  "welcomeSubtitle": "Track your progress calmly and return to yourself without extra noise.",
+  "addHabitSceneTitle": "New habit",
+  "addHabitSceneSubtitle": "Add a new habit and begin a new path at your own pace.",
+  "addHabitSceneHint": "Swipe back to return to your habits.",
+  "emptyStateTitle": "First habit",
+  "emptyStateSubtitle": "Start with one habit and simply watch your progress.",
+  "habitPickerTitle": "Add habit",
+  "habitPickerSubtitle": "Choose where you'd like to begin. You can pick a ready-made option or create your own.",
+  "habitPickerAllUsedSubtitle": "All ready-made habits have already been added. You can create your own.",
+  "customHabitTitle": "Custom habit",
+  "customHabitSubtitle": "Create your own option manually"
 }

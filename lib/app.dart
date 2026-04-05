@@ -25,6 +25,17 @@ class CleanTrackApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: AppLocales.supported,
+      localeResolutionCallback: (locale, supportedLocales) {
+        if (locale == null) {
+          return const Locale('en');
+        }
+
+        if (locale.languageCode.toLowerCase() == 'ru') {
+          return const Locale('ru');
+        }
+
+        return const Locale('en');
+      },
       home: const WelcomeScreen(),
     );
   }

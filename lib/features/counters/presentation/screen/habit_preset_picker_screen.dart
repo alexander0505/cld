@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/l10n/l10n.dart';
 import '../../data/habit_presets.dart';
 import '../../models/habit_preset.dart';
 
@@ -13,6 +14,8 @@ class HabitPresetPickerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     final regularPresets = habitPresets
         .where((preset) => !preset.isCustom)
         .where((preset) => !excludedPresetKeys.contains(preset.keyName))
@@ -57,10 +60,10 @@ class HabitPresetPickerScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Добавить привычку',
+                  Text(
+                    l10n.habitPickerTitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w800,
                       color: Color(0xFF22312B),
@@ -69,8 +72,8 @@ class HabitPresetPickerScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   Text(
                     hasRegularPresets
-                        ? 'Выбери, с чего хочешь начать.\nМожно взять готовый вариант или создать свой.'
-                        : 'Все готовые привычки уже выбраны.\nМожно создать свой вариант.',
+                        ? l10n.habitPickerSubtitle
+                        : l10n.habitPickerAllUsedSubtitle,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 16,
@@ -84,7 +87,7 @@ class HabitPresetPickerScreen extends StatelessWidget {
                       child: ListView.separated(
                         padding: EdgeInsets.zero,
                         itemCount: regularPresets.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 14),
+                        separatorBuilder: (_, separatorIndex) => const SizedBox(height: 14),
                         itemBuilder: (context, index) {
                           final preset = regularPresets[index];
                           return _HabitPresetTile(
@@ -100,6 +103,8 @@ class HabitPresetPickerScreen extends StatelessWidget {
                   const SizedBox(height: 18),
                   _CustomHabitTile(
                     preset: customPreset,
+                    title: l10n.customHabitTitle,
+                    subtitle: l10n.customHabitSubtitle,
                     onTap: () => Navigator.of(context).pop<HabitPreset>(customPreset),
                   ),
                 ],
@@ -167,10 +172,14 @@ class _HabitPresetTile extends StatelessWidget {
 
 class _CustomHabitTile extends StatelessWidget {
   final HabitPreset preset;
+  final String title;
+  final String subtitle;
   final VoidCallback onTap;
 
   const _CustomHabitTile({
     required this.preset,
+    required this.title,
+    required this.subtitle,
     required this.onTap,
   });
 
@@ -198,22 +207,22 @@ class _CustomHabitTile extends StatelessWidget {
                   style: const TextStyle(fontSize: 32),
                 ),
                 const SizedBox(width: 16),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Своя привычка',
-                        style: TextStyle(
+                        title,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                           color: Color(0xFF22312B),
                         ),
                       ),
-                      SizedBox(height: 6),
+                      const SizedBox(height: 6),
                       Text(
-                        'Создай свой вариант вручную',
-                        style: TextStyle(
+                        subtitle,
+                        style: const TextStyle(
                           fontSize: 14,
                           height: 1.35,
                           color: Color(0xFF607066),
