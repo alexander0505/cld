@@ -4,13 +4,22 @@ import '../../data/habit_presets.dart';
 import '../../models/habit_preset.dart';
 
 class HabitPresetPickerScreen extends StatelessWidget {
-  const HabitPresetPickerScreen({super.key});
+  final Set<String> excludedPresetKeys;
+
+  const HabitPresetPickerScreen({
+    super.key,
+    this.excludedPresetKeys = const {},
+  });
 
   @override
   Widget build(BuildContext context) {
-    final regularPresets =
-        habitPresets.where((preset) => !preset.isCustom).toList();
+    final regularPresets = habitPresets
+        .where((preset) => !preset.isCustom)
+        .where((preset) => !excludedPresetKeys.contains(preset.keyName))
+        .toList();
+
     final customPreset = habitPresets.firstWhere((preset) => preset.isCustom);
+    final hasRegularPresets = regularPresets.isNotEmpty;
 
     return Scaffold(
       body: Container(
@@ -58,30 +67,36 @@ class HabitPresetPickerScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const Text(
-                    'Выбери, с чего хочешь начать.\nМожно выбрать готовый вариант или создать свой.',
+                  Text(
+                    hasRegularPresets
+                        ? 'Выбери, с чего хочешь начать.\nМожно выбрать готовый вариант или создать свой.'
+                        : 'Все готовые привычки уже добавлены.\nМожно создать свой вариант.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       height: 1.45,
                       color: Color(0xFF607066),
                     ),
                   ),
                   const SizedBox(height: 28),
-                  Expanded(
-                    child: ListView.separated(
-                      padding: EdgeInsets.zero,
-                      itemCount: regularPresets.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 14),
-                      itemBuilder: (context, index) {
-                        final preset = regularPresets[index];
-                        return _HabitPresetTile(
-                          preset: preset,
-                          onTap: () => Navigator.of(context).pop<HabitPreset>(preset),
-                        );
-                      },
-                    ),
-                  ),
+                  if (hasRegularPresets)
+                    Expanded(
+                      child: ListView.separated(
+                        padding: EdgeInsets.zero,
+                        itemCount: regularPresets.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 14),
+                        itemBuilder: (context, index) {
+                          final preset = regularPresets[index];
+                          return _HabitPresetTile(
+                            preset: preset,
+                            onTap: () =>
+                                Navigator.of(context).pop<HabitPreset>(preset),
+                          );
+                        },
+                      ),
+                    )
+                  else
+                    const Spacer(),
                   const SizedBox(height: 18),
                   _CustomHabitTile(
                     preset: customPreset,

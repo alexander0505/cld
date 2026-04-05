@@ -111,9 +111,17 @@ class _CountersListScreenState extends State<CountersListScreen> {
   }
 
   Future<void> _openCreateFlow() async {
+    final excludedPresetKeys = _counters
+        .map((item) => item.presetKey)
+        .whereType<String>()
+        .where((key) => key.isNotEmpty)
+        .toSet();
+
     final preset = await Navigator.of(context).push<HabitPreset>(
       MaterialPageRoute(
-        builder: (_) => const HabitPresetPickerScreen(),
+        builder: (_) => HabitPresetPickerScreen(
+          excludedPresetKeys: excludedPresetKeys,
+        ),
       ),
     );
 
@@ -179,7 +187,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
         children: [
           const Spacer(),
           const Text(
-            'Новый счетчик',
+            'Новая привычка',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 30,
@@ -217,7 +225,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
           ),
           const SizedBox(height: 24),
           const Text(
-            'Свайпни обратно, чтобы вернуться к текущим счетчикам.',
+            'Свайпни обратно, чтобы вернуться к текущим привычкам.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -238,7 +246,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
         children: [
           const Spacer(),
           const Text(
-            'Твой первый счетчик',
+            'Твоя первая привычка',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 30,
