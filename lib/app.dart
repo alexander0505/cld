@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'features/counters/presentation/screen/counters_list_screen.dart';
 import 'features/counters/presentation/screen/welcome_screen.dart';
 
 class CleanTrackApp extends StatelessWidget {
-  final bool hasSeenWelcome;
-
-  const CleanTrackApp({
-    super.key,
-    required this.hasSeenWelcome,
-  });
+  const CleanTrackApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +14,7 @@ class CleanTrackApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
-      home: hasSeenWelcome
-          ? const CountersListScreen()
-          : const WelcomeScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }
