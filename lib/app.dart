@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'core/l10n/l10n.dart';
+import 'l10n/app_localizations.dart';
 import 'features/counters/presentation/screen/welcome_screen.dart';
 
 class CleanTrackApp extends StatelessWidget {
@@ -14,6 +17,14 @@ class CleanTrackApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
+      onGenerateTitle: (context) => context.l10n.appTitle,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: AppLocales.supported,
       home: const WelcomeScreen(),
     );
   }
