@@ -4,6 +4,22 @@ enum CounterTimeDisplayMode {
   days,
 }
 
+String formatWithSpaces(int value) {
+  final digits = value.toString();
+  final buffer = StringBuffer();
+
+  for (int i = 0; i < digits.length; i++) {
+    final reverseIndex = digits.length - i;
+    buffer.write(digits[i]);
+
+    if (reverseIndex > 1 && reverseIndex % 3 == 1) {
+      buffer.write(' ');
+    }
+  }
+
+  return buffer.toString();
+}
+
 String formatElapsed(
   DateTime startAt, {
   CounterTimeDisplayMode mode = CounterTimeDisplayMode.mixed,
@@ -12,29 +28,29 @@ String formatElapsed(
 
   switch (mode) {
     case CounterTimeDisplayMode.seconds:
-      return '${diff.inSeconds} сек';
+      return '${formatWithSpaces(diff.inSeconds)} сек';
 
     case CounterTimeDisplayMode.days:
-      return '${diff.inDays} дн';
+      return '${formatWithSpaces(diff.inDays)} дн';
 
     case CounterTimeDisplayMode.mixed:
       if (diff.inDays > 0) {
         final days = diff.inDays;
         final hours = diff.inHours % 24;
-        return '$days дн $hours ч';
+        return '${formatWithSpaces(days)} дн $hours ч';
       }
 
       if (diff.inHours > 0) {
         final hours = diff.inHours;
         final minutes = diff.inMinutes % 60;
-        return '$hours ч $minutes мин';
+        return '${formatWithSpaces(hours)} ч $minutes мин';
       }
 
       if (diff.inMinutes > 0) {
-        return '${diff.inMinutes} мин ${diff.inSeconds % 60} сек';
+        return '${formatWithSpaces(diff.inMinutes)} мин ${diff.inSeconds % 60} сек';
       }
 
-      return '${diff.inSeconds} сек';
+      return '${formatWithSpaces(diff.inSeconds)} сек';
   }
 }
 

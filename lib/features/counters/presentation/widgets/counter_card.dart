@@ -84,11 +84,11 @@ class _CounterCardState extends State<CounterCard> {
         final diff = DateTime.now().difference(widget.item.startAt);
         final hours = diff.inHours;
         final minutes = diff.inMinutes % 60;
-        return '$hours ч $minutes мин';
+        return '${formatWithSpaces(hours)} ч $minutes мин';
 
       case CounterCardDisplayMode.days:
         final diff = DateTime.now().difference(widget.item.startAt);
-        return '${diff.inDays} дн';
+        return '${formatWithSpaces(diff.inDays)} дн';
     }
   }
 
