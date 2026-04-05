@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/l10n/l10n.dart';
 import '../../data/counters_storage.dart';
+import '../../data/habit_presets.dart';
 import '../../models/counter_item.dart';
 import '../../models/habit_preset.dart';
 import '../widgets/counter_card.dart';
@@ -115,7 +116,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
     final excludedPresetKeys = _counters
         .map((item) => item.presetKey)
         .whereType<String>()
-        .where((key) => key.isNotEmpty)
+        .where((key) => key.isNotEmpty && key != 'custom')
         .toSet();
 
     final preset = await Navigator.of(context).push<HabitPreset>(
@@ -295,6 +296,8 @@ class _CountersListScreenState extends State<CountersListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     if (_isLoading) {
       return Scaffold(
         backgroundColor: const Color(0xFFF7FAFB),
@@ -306,8 +309,12 @@ class _CountersListScreenState extends State<CountersListScreen> {
       );
     }
 
-    final hasItems = _counters.isNotEmpty;
-    final totalPages = hasItems ? _counters.length + 1 : 1;
+    final localizedCounters = _counters
+        .map((item) => localizeCounterItem(item, l10n))
+        .toList();
+
+    final hasItems = localizedCounters.isNotEmpty;
+    final totalPages = hasItems ? localizedCounters.length + 1 : 1;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7FAFB),
@@ -327,16 +334,16 @@ class _CountersListScreenState extends State<CountersListScreen> {
                         },
                         itemCount: totalPages,
                         itemBuilder: (context, index) {
-                          if (index == _counters.length) {
+                          if (index == localizedCounters.length) {
                             return _buildAddCounterScene(context);
                           }
 
-                          final item = _counters[index];
+                          final item = localizedCounters[index];
                           return Padding(
                             padding: const EdgeInsets.fromLTRB(14, 22, 14, 18),
                             child: CounterCard(
                               item: item,
-                              onTap: () => _openDetails(item),
+                              onTap: () => _openDetails(_counters[index]),
                             ),
                           );
                         },

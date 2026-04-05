@@ -114,7 +114,8 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final elapsed = formatElapsed(_counter.startAt);
+    final localizedCounter = localizeCounterItem(_counter, l10n);
+    final elapsed = formatElapsed(localizedCounter.startAt);
 
     return Scaffold(
       body: Container(
@@ -160,13 +161,13 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
                   ),
                   const Spacer(),
                   Text(
-                    _counter.emoji,
+                    localizedCounter.emoji,
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 74),
                   ),
                   const SizedBox(height: 22),
                   Text(
-                    _counter.title,
+                    localizedCounter.title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 32,
@@ -188,14 +189,14 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
                   const SizedBox(height: 22),
                   _InfoBlock(
                     title: l10n.detailsStartDateTitle,
-                    value: formatDateTime(_counter.startAt),
+                    value: formatDateTime(localizedCounter.startAt),
                   ),
                   const SizedBox(height: 14),
                   _InfoBlock(
                     title: l10n.detailsReasonTitle,
-                    value: _counter.reason.isEmpty
+                    value: localizedCounter.reason.isEmpty
                         ? l10n.detailsReasonEmpty
-                        : _counter.reason,
+                        : localizedCounter.reason,
                   ),
                   const Spacer(),
                   FilledButton(
