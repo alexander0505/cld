@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../data/habit_presets.dart';
@@ -58,9 +57,10 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Сбросить счетчик?'),
-        content:
-            const Text('Текущий прогресс начнётся заново с текущего момента.'),
+        title: const Text('Начать заново?'),
+        content: const Text(
+          'Текущий прогресс начнётся заново с текущего момента.',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -68,7 +68,7 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Сбросить'),
+            child: const Text('Начать заново'),
           ),
         ],
       ),
@@ -86,7 +86,7 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Удалить счетчик?'),
+        title: const Text('Удалить привычку?'),
         content: const Text('Это действие нельзя отменить.'),
         actions: [
           TextButton(
@@ -112,98 +112,168 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
     final elapsed = formatElapsed(_counter.startAt);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_counter.title),
-        actions: [
-          IconButton(
-            onPressed: _editCounter,
-            icon: const Icon(Icons.edit),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/ocean_bg.png'),
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
           ),
-          IconButton(
-            onPressed: _confirmDelete,
-            icon: const Icon(Icons.delete_outline),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.white.withValues(alpha: 0.10),
+                Colors.white.withValues(alpha: 0.16),
+                Colors.white.withValues(alpha: 0.12),
+              ],
+            ),
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 12),
-            Text(
-              _counter.emoji,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 56),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              _counter.title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Card(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 28, horizontal: 20),
-                child: Column(
-                  children: [
-                    const Text(
-                      'Текущий результат',
-                      style: TextStyle(fontSize: 16),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: const Icon(Icons.arrow_back_ios_new),
+                        color: const Color(0xFF4E5C56),
+                      ),
+                      const Spacer(),
+                      IconButton(
+                        onPressed: _editCounter,
+                        icon: const Icon(Icons.edit_outlined),
+                        color: const Color(0xFF4E5C56),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Text(
+                    _counter.emoji,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 74),
+                  ),
+                  const SizedBox(height: 22),
+                  Text(
+                    _counter.title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF22312B),
                     ),
-                    const SizedBox(height: 12),
-                    Text(
-                      elapsed,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w800,
-                        color: Theme.of(context).colorScheme.primary,
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    elapsed,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 42,
+                      height: 1.1,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF24A770),
+                    ),
+                  ),
+                  const SizedBox(height: 22),
+                  _InfoBlock(
+                    title: 'Дата начала',
+                    value: formatDateTime(_counter.startAt),
+                  ),
+                  const SizedBox(height: 14),
+                  _InfoBlock(
+                    title: 'Причина',
+                    value: _counter.reason.isEmpty
+                        ? 'Причина не указана'
+                        : _counter.reason,
+                  ),
+                  const Spacer(),
+                  FilledButton(
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 18),
+                      backgroundColor: const Color(0xFF24A770),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(22),
                       ),
                     ),
-                  ],
-                ),
+                    onPressed: _confirmReset,
+                    child: const Text(
+                      'Начать заново',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  TextButton(
+                    onPressed: _confirmDelete,
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: const Text(
+                      'Удалить привычку',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF9A5A5A),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 16),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Дата старта',
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(formatDateTime(_counter.startAt)),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'Причина',
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      _counter.reason.isEmpty ? 'Не указана' : _counter.reason,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const Spacer(),
-            FilledButton.icon(
-              onPressed: _confirmReset,
-              icon: const Icon(Icons.refresh),
-              label: const Text('Начать заново'),
-            ),
-          ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class _InfoBlock extends StatelessWidget {
+  final String title;
+  final String value;
+
+  const _InfoBlock({
+    required this.title,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        color: Colors.white.withValues(alpha: 0.22),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF748379),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
+              height: 1.4,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF22312B),
+            ),
+          ),
+        ],
       ),
     );
   }
