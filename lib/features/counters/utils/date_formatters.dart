@@ -1,3 +1,5 @@
+import '../../../l10n/app_localizations.dart';
+
 enum CounterTimeDisplayMode {
   seconds,
   mixed,
@@ -21,36 +23,37 @@ String formatWithSpaces(int value) {
 }
 
 String formatElapsed(
-  DateTime startAt, {
+  DateTime startAt,
+  AppLocalizations l10n, {
   CounterTimeDisplayMode mode = CounterTimeDisplayMode.mixed,
 }) {
   final diff = DateTime.now().difference(startAt);
 
   switch (mode) {
     case CounterTimeDisplayMode.seconds:
-      return '${formatWithSpaces(diff.inSeconds)} сек';
+      return '${formatWithSpaces(diff.inSeconds)} ${l10n.timeUnitSecondsShort}';
 
     case CounterTimeDisplayMode.days:
-      return '${formatWithSpaces(diff.inDays)} дн';
+      return '${formatWithSpaces(diff.inDays)} ${l10n.timeUnitDaysShort}';
 
     case CounterTimeDisplayMode.mixed:
       if (diff.inDays > 0) {
         final days = diff.inDays;
         final hours = diff.inHours % 24;
-        return '${formatWithSpaces(days)} дн $hours ч';
+        return '${formatWithSpaces(days)} ${l10n.timeUnitDaysShort} $hours ${l10n.timeUnitHoursShort}';
       }
 
       if (diff.inHours > 0) {
         final hours = diff.inHours;
         final minutes = diff.inMinutes % 60;
-        return '${formatWithSpaces(hours)} ч $minutes мин';
+        return '${formatWithSpaces(hours)} ${l10n.timeUnitHoursShort} $minutes ${l10n.timeUnitMinutesShort}';
       }
 
       if (diff.inMinutes > 0) {
-        return '${formatWithSpaces(diff.inMinutes)} мин ${diff.inSeconds % 60} сек';
+        return '${formatWithSpaces(diff.inMinutes)} ${l10n.timeUnitMinutesShort} ${diff.inSeconds % 60} ${l10n.timeUnitSecondsShort}';
       }
 
-      return '${formatWithSpaces(diff.inSeconds)} сек';
+      return '${formatWithSpaces(diff.inSeconds)} ${l10n.timeUnitSecondsShort}';
   }
 }
 

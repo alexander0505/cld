@@ -251,4 +251,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get presetCustomReason4 => 'I want to change my life for the better';
+
+  @override
+  String get timeUnitSecondsShort => 'sec';
+
+  @override
+  String get timeUnitMinutesShort => 'min';
+
+  @override
+  String get timeUnitHoursShort => 'h';
+
+  @override
+  String get timeUnitDaysShort => 'd';
 }

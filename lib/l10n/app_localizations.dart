@@ -571,6 +571,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I want to change my life for the better'**
   String get presetCustomReason4;
+
+  /// No description provided for @timeUnitSecondsShort.
+  ///
+  /// In en, this message translates to:
+  /// **'sec'**
+  String get timeUnitSecondsShort;
+
+  /// No description provided for @timeUnitMinutesShort.
+  ///
+  /// In en, this message translates to:
+  /// **'min'**
+  String get timeUnitMinutesShort;
+
+  /// No description provided for @timeUnitHoursShort.
+  ///
+  /// In en, this message translates to:
+  /// **'h'**
+  String get timeUnitHoursShort;
+
+  /// No description provided for @timeUnitDaysShort.
+  ///
+  /// In en, this message translates to:
+  /// **'d'**
+  String get timeUnitDaysShort;
 }
 
 class _AppLocalizationsDelegate

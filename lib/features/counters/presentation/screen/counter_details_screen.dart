@@ -115,7 +115,7 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final localizedCounter = localizeCounterItem(_counter, l10n);
-    final elapsed = formatElapsed(localizedCounter.startAt);
+    final elapsed = formatElapsed(localizedCounter.startAt, l10n);
 
     return Scaffold(
       body: Container(

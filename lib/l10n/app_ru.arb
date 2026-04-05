@@ -39,7 +39,6 @@
   "detailsDeleteDialogBody": "Это действие нельзя отменить.",
   "commonCancel": "Отмена",
   "commonDelete": "Удалить",
-
   "presetAlcoholTitle": "Алкоголь",
   "presetSmokingTitle": "Сигареты",
   "presetSugarTitle": "Сахар",
@@ -48,44 +47,40 @@
   "presetSocialTitle": "Соцсети",
   "presetGamesTitle": "Игры",
   "presetCustomTitle": "Своя привычка",
-
   "presetAlcoholReason1": "Хочу лучше себя чувствовать",
   "presetAlcoholReason2": "Хочу лучше спать",
   "presetAlcoholReason3": "Хочу быть собраннее",
   "presetAlcoholReason4": "Хочу больше контролировать свою жизнь",
-
   "presetSmokingReason1": "Хочу улучшить здоровье",
   "presetSmokingReason2": "Хочу легче дышать",
   "presetSmokingReason3": "Хочу меньше тратить денег",
   "presetSmokingReason4": "Хочу чувствовать себя свободнее",
-
   "presetSugarReason1": "Хочу меньше скачков энергии",
   "presetSugarReason2": "Хочу стабильное самочувствие",
   "presetSugarReason3": "Хочу лучше питаться",
   "presetSugarReason4": "Хочу похудеть",
-
   "presetCoffeeReason1": "Хочу лучше спать",
   "presetCoffeeReason2": "Хочу убрать тревожность",
   "presetCoffeeReason3": "Хочу меньше зависеть от стимуляторов",
   "presetCoffeeReason4": "Хочу стабильную энергию без кофеина",
-
   "presetPornReason1": "Хочу больше самоконтроля",
   "presetPornReason2": "Хочу больше энергии",
   "presetPornReason3": "Хочу улучшить концентрацию",
   "presetPornReason4": "Хочу вернуть ясность мышления",
-
   "presetSocialReason1": "Хочу меньше отвлекаться",
   "presetSocialReason2": "Хочу вернуть концентрацию",
   "presetSocialReason3": "Хочу меньше зависеть от телефона",
   "presetSocialReason4": "Хочу освободить время",
-
   "presetGamesReason1": "Хочу вернуть контроль над временем",
   "presetGamesReason2": "Хочу делать больше полезного",
   "presetGamesReason3": "Хочу меньше прокрастинировать",
   "presetGamesReason4": "Хочу лучше концентрироваться",
-
   "presetCustomReason1": "Хочу улучшить здоровье",
   "presetCustomReason2": "Хочу больше энергии",
   "presetCustomReason3": "Хочу больше контроля над собой",
-  "presetCustomReason4": "Хочу изменить жизнь к лучшему"
+  "presetCustomReason4": "Хочу изменить жизнь к лучшему",
+  "timeUnitSecondsShort": "сек",
+  "timeUnitMinutesShort": "мин",
+  "timeUnitHoursShort": "ч",
+  "timeUnitDaysShort": "дн"
 }

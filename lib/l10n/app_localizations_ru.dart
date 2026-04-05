@@ -252,4 +252,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get presetCustomReason4 => 'Хочу изменить жизнь к лучшему';
+
+  @override
+  String get timeUnitSecondsShort => 'сек';
+
+  @override
+  String get timeUnitMinutesShort => 'мин';
+
+  @override
+  String get timeUnitHoursShort => 'ч';
+
+  @override
+  String get timeUnitDaysShort => 'дн';
 }

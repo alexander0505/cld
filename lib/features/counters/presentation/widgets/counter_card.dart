@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/l10n/l10n.dart';
 import '../../models/counter_item.dart';
 import '../../utils/date_formatters.dart';
 
@@ -66,10 +67,13 @@ class _CounterCardState extends State<CounterCard> {
   }
 
   String _buildDisplayValue() {
+    final l10n = context.l10n;
+
     switch (_displayMode) {
       case CounterCardDisplayMode.seconds:
         return formatElapsed(
           widget.item.startAt,
+          l10n,
           mode: CounterTimeDisplayMode.seconds,
         );
 
@@ -84,11 +88,11 @@ class _CounterCardState extends State<CounterCard> {
         final diff = DateTime.now().difference(widget.item.startAt);
         final hours = diff.inHours;
         final minutes = diff.inMinutes % 60;
-        return '${formatWithSpaces(hours)} ч $minutes мин';
+        return '${formatWithSpaces(hours)} ${l10n.timeUnitHoursShort} $minutes ${l10n.timeUnitMinutesShort}';
 
       case CounterCardDisplayMode.days:
         final diff = DateTime.now().difference(widget.item.startAt);
-        return '${formatWithSpaces(diff.inDays)} дн';
+        return '${formatWithSpaces(diff.inDays)} ${l10n.timeUnitDaysShort}';
     }
   }
 
