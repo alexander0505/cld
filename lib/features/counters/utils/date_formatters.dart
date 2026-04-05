@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import '../../../l10n/app_localizations.dart';
 
 enum CounterTimeDisplayMode {
@@ -57,14 +59,28 @@ String formatElapsed(
   }
 }
 
-String formatDateTime(DateTime dateTime) {
-  String two(int value) => value.toString().padLeft(2, '0');
+String formatDateTime(
+  DateTime dateTime,
+  AppLocalizations l10n,
+) {
+  final localeName = l10n.localeName.toLowerCase();
 
-  final day = two(dateTime.day);
-  final month = two(dateTime.month);
-  final year = dateTime.year;
-  final hour = two(dateTime.hour);
-  final minute = two(dateTime.minute);
+  if (localeName.startsWith('ru')) {
+    return DateFormat('dd.MM.yyyy HH:mm', localeName).format(dateTime);
+  }
 
-  return '$day.$month.$year $hour:$minute';
+  return DateFormat('MMM d, y • HH:mm', localeName).format(dateTime);
+}
+
+String formatStartDateOnly(
+  DateTime dateTime,
+  AppLocalizations l10n,
+) {
+  final localeName = l10n.localeName.toLowerCase();
+
+  if (localeName.startsWith('ru')) {
+    return DateFormat('dd.MM.yyyy', localeName).format(dateTime);
+  }
+
+  return DateFormat('MMM d, y', localeName).format(dateTime);
 }

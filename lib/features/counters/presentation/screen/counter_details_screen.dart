@@ -189,7 +189,7 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
                   const SizedBox(height: 22),
                   _InfoBlock(
                     title: l10n.detailsStartDateTitle,
-                    value: formatDateTime(localizedCounter.startAt),
+                    value: formatDateTime(localizedCounter.startAt, l10n),
                   ),
                   const SizedBox(height: 14),
                   _InfoBlock(

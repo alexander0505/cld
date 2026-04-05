@@ -267,7 +267,7 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                                 const SizedBox(width: 14),
                                 Expanded(
                                   child: Text(
-                                    formatDateTime(_startAt),
+                                    formatDateTime(_startAt, l10n),
                                     style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
