@@ -3,55 +3,6 @@ set -euo pipefail
 
 mkdir -p lib/features/counters/presentation/widgets/details
 
-cat > lib/features/counters/presentation/widgets/details/info_block.dart <<'EOF'
-import 'package:flutter/material.dart';
-
-class InfoBlock extends StatelessWidget {
-  final String title;
-  final String value;
-
-  const InfoBlock({
-    super.key,
-    required this.title,
-    required this.value,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: Colors.white.withValues(alpha: 0.22),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF748379),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 16,
-              height: 1.4,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF22312B),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-EOF
-
 cat > lib/features/counters/presentation/widgets/details/destructive_actions.dart <<'EOF'
 import 'package:flutter/material.dart';
 
@@ -72,36 +23,45 @@ class DestructiveActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        FilledButton(
-          style: FilledButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            backgroundColor: const Color(0xFF24A770),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(22),
+        SizedBox(
+          width: double.infinity,
+          child: FilledButton(
+            style: FilledButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 18),
+              backgroundColor: Colors.white.withValues(alpha: 0.46),
+              foregroundColor: const Color(0xFF1F7E61),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+                side: BorderSide(
+                  color: const Color(0xFF24A770).withValues(alpha: 0.22),
+                ),
+              ),
             ),
-          ),
-          onPressed: onReset,
-          child: Text(
-            resetTitle,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
+            onPressed: onReset,
+            child: Text(
+              resetTitle,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 14),
         TextButton(
           onPressed: onDelete,
           style: TextButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.symmetric(vertical: 14),
           ),
           child: Text(
             deleteTitle,
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF9A5A5A),
+              color: Color(0xFFB06B6B),
             ),
           ),
         ),
@@ -116,7 +76,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/l10n/l10n.dart';
 import '../../data/habit_presets.dart';
-import '../../data/habit_presets.dart' show localizeCounterItem;
 import '../../models/counter_item.dart';
 import '../../utils/date_formatters.dart';
 import '../widgets/details/destructive_actions.dart';
@@ -326,12 +285,16 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
                         : localizedCounter.reason,
                   ),
                   const Spacer(),
-                  DestructiveActions(
-                    resetTitle: l10n.detailsResetAction,
-                    deleteTitle: l10n.detailsDeleteAction,
-                    onReset: _confirmReset,
-                    onDelete: _confirmDelete,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
+                    child: DestructiveActions(
+                      resetTitle: l10n.detailsResetAction,
+                      deleteTitle: l10n.detailsDeleteAction,
+                      onReset: _confirmReset,
+                      onDelete: _confirmDelete,
+                    ),
                   ),
+                  const SizedBox(height: 8),
                 ],
               ),
             ),

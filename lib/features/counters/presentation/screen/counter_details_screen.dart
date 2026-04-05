@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/l10n/l10n.dart';
 import '../../data/habit_presets.dart';
-import '../../data/habit_presets.dart' show localizeCounterItem;
 import '../../models/counter_item.dart';
 import '../../utils/date_formatters.dart';
 import '../widgets/details/destructive_actions.dart';
@@ -212,12 +211,16 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
                         : localizedCounter.reason,
                   ),
                   const Spacer(),
-                  DestructiveActions(
-                    resetTitle: l10n.detailsResetAction,
-                    deleteTitle: l10n.detailsDeleteAction,
-                    onReset: _confirmReset,
-                    onDelete: _confirmDelete,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
+                    child: DestructiveActions(
+                      resetTitle: l10n.detailsResetAction,
+                      deleteTitle: l10n.detailsDeleteAction,
+                      onReset: _confirmReset,
+                      onDelete: _confirmDelete,
+                    ),
                   ),
+                  const SizedBox(height: 8),
                 ],
               ),
             ),

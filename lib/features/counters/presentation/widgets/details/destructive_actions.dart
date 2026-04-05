@@ -17,36 +17,45 @@ class DestructiveActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        FilledButton(
-          style: FilledButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            backgroundColor: const Color(0xFF24A770),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(22),
+        SizedBox(
+          width: double.infinity,
+          child: FilledButton(
+            style: FilledButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 18),
+              backgroundColor: Colors.white.withValues(alpha: 0.46),
+              foregroundColor: const Color(0xFF1F7E61),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+                side: BorderSide(
+                  color: const Color(0xFF24A770).withValues(alpha: 0.22),
+                ),
+              ),
             ),
-          ),
-          onPressed: onReset,
-          child: Text(
-            resetTitle,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
+            onPressed: onReset,
+            child: Text(
+              resetTitle,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 14),
         TextButton(
           onPressed: onDelete,
           style: TextButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.symmetric(vertical: 14),
           ),
           child: Text(
             deleteTitle,
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF9A5A5A),
+              color: Color(0xFFB06B6B),
             ),
           ),
         ),
