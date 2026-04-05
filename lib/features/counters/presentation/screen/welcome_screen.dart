@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/l10n/l10n.dart';
 import '../../data/counters_storage.dart';
 import 'counters_list_screen.dart';
 
@@ -44,6 +45,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -89,10 +92,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    const Text(
-                      'Clean Track',
+                    Text(
+                      l10n.welcomeTitle,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 34,
                         fontWeight: FontWeight.w800,
                         letterSpacing: -0.5,
@@ -100,10 +103,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    const Text(
-                      'Спокойно наблюдай за своим прогрессом\nи возвращайся к себе без лишнего шума.',
+                    Text(
+                      l10n.welcomeSubtitle,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         height: 1.45,
                         color: Color(0xFF607066),
