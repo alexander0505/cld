@@ -34,8 +34,9 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
   }
 
   Future<void> _editCounter() async {
+    final l10n = context.l10n;
     final matchedPreset =
-        findHabitPresetByKey(_counter.presetKey) ?? habitPresets.last;
+        findHabitPresetByKey(_counter.presetKey, l10n) ?? customHabitPreset(l10n);
 
     final result = await Navigator.of(context).push<CounterItem>(
       MaterialPageRoute(

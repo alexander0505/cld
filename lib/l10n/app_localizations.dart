@@ -331,6 +331,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete'**
   String get commonDelete;
+
+  /// No description provided for @presetAlcoholTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Alcohol'**
+  String get presetAlcoholTitle;
+
+  /// No description provided for @presetSmokingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Smoking'**
+  String get presetSmokingTitle;
+
+  /// No description provided for @presetSugarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sugar'**
+  String get presetSugarTitle;
+
+  /// No description provided for @presetCoffeeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Coffee'**
+  String get presetCoffeeTitle;
+
+  /// No description provided for @presetPornTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Porn'**
+  String get presetPornTitle;
+
+  /// No description provided for @presetSocialTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Social media'**
+  String get presetSocialTitle;
+
+  /// No description provided for @presetGamesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Games'**
+  String get presetGamesTitle;
+
+  /// No description provided for @presetCustomTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom habit'**
+  String get presetCustomTitle;
+
+  /// No description provided for @presetAlcoholReason1.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to feel better'**
+  String get presetAlcoholReason1;
+
+  /// No description provided for @presetAlcoholReason2.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to sleep better'**
+  String get presetAlcoholReason2;
+
+  /// No description provided for @presetAlcoholReason3.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to feel more collected'**
+  String get presetAlcoholReason3;
+
+  /// No description provided for @presetAlcoholReason4.
+  ///
+  /// In en, this message translates to:
+  /// **'I want more control over my life'**
+  String get presetAlcoholReason4;
+
+  /// No description provided for @presetSmokingReason1.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to improve my health'**
+  String get presetSmokingReason1;
+
+  /// No description provided for @presetSmokingReason2.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to breathe more easily'**
+  String get presetSmokingReason2;
+
+  /// No description provided for @presetSmokingReason3.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to spend less money'**
+  String get presetSmokingReason3;
+
+  /// No description provided for @presetSmokingReason4.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to feel more free'**
+  String get presetSmokingReason4;
+
+  /// No description provided for @presetSugarReason1.
+  ///
+  /// In en, this message translates to:
+  /// **'I want fewer energy crashes'**
+  String get presetSugarReason1;
+
+  /// No description provided for @presetSugarReason2.
+  ///
+  /// In en, this message translates to:
+  /// **'I want steadier well-being'**
+  String get presetSugarReason2;
+
+  /// No description provided for @presetSugarReason3.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to eat better'**
+  String get presetSugarReason3;
+
+  /// No description provided for @presetSugarReason4.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to lose weight'**
+  String get presetSugarReason4;
+
+  /// No description provided for @presetCoffeeReason1.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to sleep better'**
+  String get presetCoffeeReason1;
+
+  /// No description provided for @presetCoffeeReason2.
+  ///
+  /// In en, this message translates to:
+  /// **'I want less anxiety'**
+  String get presetCoffeeReason2;
+
+  /// No description provided for @presetCoffeeReason3.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to rely less on stimulants'**
+  String get presetCoffeeReason3;
+
+  /// No description provided for @presetCoffeeReason4.
+  ///
+  /// In en, this message translates to:
+  /// **'I want stable energy without caffeine'**
+  String get presetCoffeeReason4;
+
+  /// No description provided for @presetPornReason1.
+  ///
+  /// In en, this message translates to:
+  /// **'I want more self-control'**
+  String get presetPornReason1;
+
+  /// No description provided for @presetPornReason2.
+  ///
+  /// In en, this message translates to:
+  /// **'I want more energy'**
+  String get presetPornReason2;
+
+  /// No description provided for @presetPornReason3.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to improve focus'**
+  String get presetPornReason3;
+
+  /// No description provided for @presetPornReason4.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to regain mental clarity'**
+  String get presetPornReason4;
+
+  /// No description provided for @presetSocialReason1.
+  ///
+  /// In en, this message translates to:
+  /// **'I want fewer distractions'**
+  String get presetSocialReason1;
+
+  /// No description provided for @presetSocialReason2.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to regain focus'**
+  String get presetSocialReason2;
+
+  /// No description provided for @presetSocialReason3.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to depend less on my phone'**
+  String get presetSocialReason3;
+
+  /// No description provided for @presetSocialReason4.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to free up time'**
+  String get presetSocialReason4;
+
+  /// No description provided for @presetGamesReason1.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to regain control over my time'**
+  String get presetGamesReason1;
+
+  /// No description provided for @presetGamesReason2.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to do more useful things'**
+  String get presetGamesReason2;
+
+  /// No description provided for @presetGamesReason3.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to procrastinate less'**
+  String get presetGamesReason3;
+
+  /// No description provided for @presetGamesReason4.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to focus better'**
+  String get presetGamesReason4;
+
+  /// No description provided for @presetCustomReason1.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to improve my health'**
+  String get presetCustomReason1;
+
+  /// No description provided for @presetCustomReason2.
+  ///
+  /// In en, this message translates to:
+  /// **'I want more energy'**
+  String get presetCustomReason2;
+
+  /// No description provided for @presetCustomReason3.
+  ///
+  /// In en, this message translates to:
+  /// **'I want more control over myself'**
+  String get presetCustomReason3;
+
+  /// No description provided for @presetCustomReason4.
+  ///
+  /// In en, this message translates to:
+  /// **'I want to change my life for the better'**
+  String get presetCustomReason4;
 }
 
 class _AppLocalizationsDelegate

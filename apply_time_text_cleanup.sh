@@ -42,7 +42,56 @@ cat > lib/l10n/app_en.arb <<'EOF'
   "detailsDeleteDialogTitle": "Delete habit?",
   "detailsDeleteDialogBody": "This action cannot be undone.",
   "commonCancel": "Cancel",
-  "commonDelete": "Delete"
+  "commonDelete": "Delete",
+
+  "presetAlcoholTitle": "Alcohol",
+  "presetSmokingTitle": "Smoking",
+  "presetSugarTitle": "Sugar",
+  "presetCoffeeTitle": "Coffee",
+  "presetPornTitle": "Porn",
+  "presetSocialTitle": "Social media",
+  "presetGamesTitle": "Games",
+  "presetCustomTitle": "Custom habit",
+
+  "presetAlcoholReason1": "I want to feel better",
+  "presetAlcoholReason2": "I want to sleep better",
+  "presetAlcoholReason3": "I want to feel more collected",
+  "presetAlcoholReason4": "I want more control over my life",
+
+  "presetSmokingReason1": "I want to improve my health",
+  "presetSmokingReason2": "I want to breathe more easily",
+  "presetSmokingReason3": "I want to spend less money",
+  "presetSmokingReason4": "I want to feel more free",
+
+  "presetSugarReason1": "I want fewer energy crashes",
+  "presetSugarReason2": "I want steadier well-being",
+  "presetSugarReason3": "I want to eat better",
+  "presetSugarReason4": "I want to lose weight",
+
+  "presetCoffeeReason1": "I want to sleep better",
+  "presetCoffeeReason2": "I want less anxiety",
+  "presetCoffeeReason3": "I want to rely less on stimulants",
+  "presetCoffeeReason4": "I want stable energy without caffeine",
+
+  "presetPornReason1": "I want more self-control",
+  "presetPornReason2": "I want more energy",
+  "presetPornReason3": "I want to improve focus",
+  "presetPornReason4": "I want to regain mental clarity",
+
+  "presetSocialReason1": "I want fewer distractions",
+  "presetSocialReason2": "I want to regain focus",
+  "presetSocialReason3": "I want to depend less on my phone",
+  "presetSocialReason4": "I want to free up time",
+
+  "presetGamesReason1": "I want to regain control over my time",
+  "presetGamesReason2": "I want to do more useful things",
+  "presetGamesReason3": "I want to procrastinate less",
+  "presetGamesReason4": "I want to focus better",
+
+  "presetCustomReason1": "I want to improve my health",
+  "presetCustomReason2": "I want more energy",
+  "presetCustomReason3": "I want more control over myself",
+  "presetCustomReason4": "I want to change my life for the better"
 }
 EOF
 
@@ -87,7 +136,420 @@ cat > lib/l10n/app_ru.arb <<'EOF'
   "detailsDeleteDialogTitle": "Удалить привычку?",
   "detailsDeleteDialogBody": "Это действие нельзя отменить.",
   "commonCancel": "Отмена",
-  "commonDelete": "Удалить"
+  "commonDelete": "Удалить",
+
+  "presetAlcoholTitle": "Алкоголь",
+  "presetSmokingTitle": "Сигареты",
+  "presetSugarTitle": "Сахар",
+  "presetCoffeeTitle": "Кофе",
+  "presetPornTitle": "Порно",
+  "presetSocialTitle": "Соцсети",
+  "presetGamesTitle": "Игры",
+  "presetCustomTitle": "Своя привычка",
+
+  "presetAlcoholReason1": "Хочу лучше себя чувствовать",
+  "presetAlcoholReason2": "Хочу лучше спать",
+  "presetAlcoholReason3": "Хочу быть собраннее",
+  "presetAlcoholReason4": "Хочу больше контролировать свою жизнь",
+
+  "presetSmokingReason1": "Хочу улучшить здоровье",
+  "presetSmokingReason2": "Хочу легче дышать",
+  "presetSmokingReason3": "Хочу меньше тратить денег",
+  "presetSmokingReason4": "Хочу чувствовать себя свободнее",
+
+  "presetSugarReason1": "Хочу меньше скачков энергии",
+  "presetSugarReason2": "Хочу стабильное самочувствие",
+  "presetSugarReason3": "Хочу лучше питаться",
+  "presetSugarReason4": "Хочу похудеть",
+
+  "presetCoffeeReason1": "Хочу лучше спать",
+  "presetCoffeeReason2": "Хочу убрать тревожность",
+  "presetCoffeeReason3": "Хочу меньше зависеть от стимуляторов",
+  "presetCoffeeReason4": "Хочу стабильную энергию без кофеина",
+
+  "presetPornReason1": "Хочу больше самоконтроля",
+  "presetPornReason2": "Хочу больше энергии",
+  "presetPornReason3": "Хочу улучшить концентрацию",
+  "presetPornReason4": "Хочу вернуть ясность мышления",
+
+  "presetSocialReason1": "Хочу меньше отвлекаться",
+  "presetSocialReason2": "Хочу вернуть концентрацию",
+  "presetSocialReason3": "Хочу меньше зависеть от телефона",
+  "presetSocialReason4": "Хочу освободить время",
+
+  "presetGamesReason1": "Хочу вернуть контроль над временем",
+  "presetGamesReason2": "Хочу делать больше полезного",
+  "presetGamesReason3": "Хочу меньше прокрастинировать",
+  "presetGamesReason4": "Хочу лучше концентрироваться",
+
+  "presetCustomReason1": "Хочу улучшить здоровье",
+  "presetCustomReason2": "Хочу больше энергии",
+  "presetCustomReason3": "Хочу больше контроля над собой",
+  "presetCustomReason4": "Хочу изменить жизнь к лучшему"
+}
+EOF
+
+cat > lib/features/counters/data/habit_presets.dart <<'EOF'
+import '../../../../l10n/app_localizations.dart';
+import '../models/habit_preset.dart';
+
+List<HabitPreset> buildHabitPresets(AppLocalizations l10n) {
+  return [
+    HabitPreset(
+      keyName: 'alcohol',
+      title: l10n.presetAlcoholTitle,
+      emoji: '🍷',
+      reasons: [
+        l10n.presetAlcoholReason1,
+        l10n.presetAlcoholReason2,
+        l10n.presetAlcoholReason3,
+        l10n.presetAlcoholReason4,
+      ],
+    ),
+    HabitPreset(
+      keyName: 'smoking',
+      title: l10n.presetSmokingTitle,
+      emoji: '🚭',
+      reasons: [
+        l10n.presetSmokingReason1,
+        l10n.presetSmokingReason2,
+        l10n.presetSmokingReason3,
+        l10n.presetSmokingReason4,
+      ],
+    ),
+    HabitPreset(
+      keyName: 'sugar',
+      title: l10n.presetSugarTitle,
+      emoji: '🍰',
+      reasons: [
+        l10n.presetSugarReason1,
+        l10n.presetSugarReason2,
+        l10n.presetSugarReason3,
+        l10n.presetSugarReason4,
+      ],
+    ),
+    HabitPreset(
+      keyName: 'coffee',
+      title: l10n.presetCoffeeTitle,
+      emoji: '☕',
+      reasons: [
+        l10n.presetCoffeeReason1,
+        l10n.presetCoffeeReason2,
+        l10n.presetCoffeeReason3,
+        l10n.presetCoffeeReason4,
+      ],
+    ),
+    HabitPreset(
+      keyName: 'porn',
+      title: l10n.presetPornTitle,
+      emoji: '🔞',
+      reasons: [
+        l10n.presetPornReason1,
+        l10n.presetPornReason2,
+        l10n.presetPornReason3,
+        l10n.presetPornReason4,
+      ],
+    ),
+    HabitPreset(
+      keyName: 'social',
+      title: l10n.presetSocialTitle,
+      emoji: '📱',
+      reasons: [
+        l10n.presetSocialReason1,
+        l10n.presetSocialReason2,
+        l10n.presetSocialReason3,
+        l10n.presetSocialReason4,
+      ],
+    ),
+    HabitPreset(
+      keyName: 'games',
+      title: l10n.presetGamesTitle,
+      emoji: '🎮',
+      reasons: [
+        l10n.presetGamesReason1,
+        l10n.presetGamesReason2,
+        l10n.presetGamesReason3,
+        l10n.presetGamesReason4,
+      ],
+    ),
+    HabitPreset(
+      keyName: 'custom',
+      title: l10n.presetCustomTitle,
+      emoji: '💪',
+      reasons: [
+        l10n.presetCustomReason1,
+        l10n.presetCustomReason2,
+        l10n.presetCustomReason3,
+        l10n.presetCustomReason4,
+      ],
+      isCustom: true,
+    ),
+  ];
+}
+
+HabitPreset? findHabitPresetByKey(
+  String? key,
+  AppLocalizations l10n,
+) {
+  if (key == null) return null;
+
+  for (final preset in buildHabitPresets(l10n)) {
+    if (preset.keyName == key) return preset;
+  }
+  return null;
+}
+
+HabitPreset customHabitPreset(AppLocalizations l10n) {
+  return buildHabitPresets(l10n).firstWhere((preset) => preset.isCustom);
+}
+EOF
+
+cat > lib/features/counters/presentation/screen/habit_preset_picker_screen.dart <<'EOF'
+import 'package:flutter/material.dart';
+
+import '../../../../core/l10n/l10n.dart';
+import '../../data/habit_presets.dart';
+import '../../models/habit_preset.dart';
+
+class HabitPresetPickerScreen extends StatelessWidget {
+  final Set<String> excludedPresetKeys;
+
+  const HabitPresetPickerScreen({
+    super.key,
+    this.excludedPresetKeys = const {},
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final allPresets = buildHabitPresets(l10n);
+
+    final regularPresets = allPresets
+        .where((preset) => !preset.isCustom)
+        .where((preset) => !excludedPresetKeys.contains(preset.keyName))
+        .toList();
+
+    final customPreset = allPresets.firstWhere((preset) => preset.isCustom);
+    final hasRegularPresets = regularPresets.isNotEmpty;
+
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/ocean_bg.png'),
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
+          ),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.white.withValues(alpha: 0.10),
+                Colors.white.withValues(alpha: 0.16),
+                Colors.white.withValues(alpha: 0.12),
+              ],
+            ),
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const Icon(Icons.arrow_back_ios_new),
+                      color: const Color(0xFF4E5C56),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    l10n.habitPickerTitle,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF22312B),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    hasRegularPresets
+                        ? l10n.habitPickerSubtitle
+                        : l10n.habitPickerAllUsedSubtitle,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      height: 1.45,
+                      color: Color(0xFF607066),
+                    ),
+                  ),
+                  const SizedBox(height: 28),
+                  if (hasRegularPresets)
+                    Expanded(
+                      child: ListView.separated(
+                        padding: EdgeInsets.zero,
+                        itemCount: regularPresets.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 14),
+                        itemBuilder: (context, index) {
+                          final preset = regularPresets[index];
+                          return _HabitPresetTile(
+                            preset: preset,
+                            onTap: () =>
+                                Navigator.of(context).pop<HabitPreset>(preset),
+                          );
+                        },
+                      ),
+                    )
+                  else
+                    const Spacer(),
+                  const SizedBox(height: 18),
+                  _CustomHabitTile(
+                    preset: customPreset,
+                    title: l10n.customHabitTitle,
+                    subtitle: l10n.customHabitSubtitle,
+                    onTap: () => Navigator.of(context).pop<HabitPreset>(customPreset),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _HabitPresetTile extends StatelessWidget {
+  final HabitPreset preset;
+  final VoidCallback onTap;
+
+  const _HabitPresetTile({
+    required this.preset,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        color: Colors.white.withValues(alpha: 0.20),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(28),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
+            child: Row(
+              children: [
+                Text(
+                  preset.emoji,
+                  style: const TextStyle(fontSize: 32),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    preset.title,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF22312B),
+                    ),
+                  ),
+                ),
+                const Icon(
+                  Icons.chevron_right,
+                  color: Color(0xFF748379),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CustomHabitTile extends StatelessWidget {
+  final HabitPreset preset;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  const _CustomHabitTile({
+    required this.preset,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        color: Colors.white.withValues(alpha: 0.76),
+        border: Border.all(
+          color: const Color(0xFFE6ECE6),
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(28),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 22),
+            child: Row(
+              children: [
+                Text(
+                  preset.emoji,
+                  style: const TextStyle(fontSize: 32),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF22312B),
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        subtitle,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          height: 1.35,
+                          color: Color(0xFF607066),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Icon(
+                  Icons.add_circle_outline,
+                  color: Color(0xFF24A770),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 EOF
 
@@ -128,8 +590,9 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
   }
 
   Future<void> _editCounter() async {
+    final l10n = context.l10n;
     final matchedPreset =
-        findHabitPresetByKey(_counter.presetKey) ?? habitPresets.last;
+        findHabitPresetByKey(_counter.presetKey, l10n) ?? customHabitPreset(l10n);
 
     final result = await Navigator.of(context).push<CounterItem>(
       MaterialPageRoute(

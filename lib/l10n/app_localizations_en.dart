@@ -131,4 +131,124 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get commonDelete => 'Delete';
+
+  @override
+  String get presetAlcoholTitle => 'Alcohol';
+
+  @override
+  String get presetSmokingTitle => 'Smoking';
+
+  @override
+  String get presetSugarTitle => 'Sugar';
+
+  @override
+  String get presetCoffeeTitle => 'Coffee';
+
+  @override
+  String get presetPornTitle => 'Porn';
+
+  @override
+  String get presetSocialTitle => 'Social media';
+
+  @override
+  String get presetGamesTitle => 'Games';
+
+  @override
+  String get presetCustomTitle => 'Custom habit';
+
+  @override
+  String get presetAlcoholReason1 => 'I want to feel better';
+
+  @override
+  String get presetAlcoholReason2 => 'I want to sleep better';
+
+  @override
+  String get presetAlcoholReason3 => 'I want to feel more collected';
+
+  @override
+  String get presetAlcoholReason4 => 'I want more control over my life';
+
+  @override
+  String get presetSmokingReason1 => 'I want to improve my health';
+
+  @override
+  String get presetSmokingReason2 => 'I want to breathe more easily';
+
+  @override
+  String get presetSmokingReason3 => 'I want to spend less money';
+
+  @override
+  String get presetSmokingReason4 => 'I want to feel more free';
+
+  @override
+  String get presetSugarReason1 => 'I want fewer energy crashes';
+
+  @override
+  String get presetSugarReason2 => 'I want steadier well-being';
+
+  @override
+  String get presetSugarReason3 => 'I want to eat better';
+
+  @override
+  String get presetSugarReason4 => 'I want to lose weight';
+
+  @override
+  String get presetCoffeeReason1 => 'I want to sleep better';
+
+  @override
+  String get presetCoffeeReason2 => 'I want less anxiety';
+
+  @override
+  String get presetCoffeeReason3 => 'I want to rely less on stimulants';
+
+  @override
+  String get presetCoffeeReason4 => 'I want stable energy without caffeine';
+
+  @override
+  String get presetPornReason1 => 'I want more self-control';
+
+  @override
+  String get presetPornReason2 => 'I want more energy';
+
+  @override
+  String get presetPornReason3 => 'I want to improve focus';
+
+  @override
+  String get presetPornReason4 => 'I want to regain mental clarity';
+
+  @override
+  String get presetSocialReason1 => 'I want fewer distractions';
+
+  @override
+  String get presetSocialReason2 => 'I want to regain focus';
+
+  @override
+  String get presetSocialReason3 => 'I want to depend less on my phone';
+
+  @override
+  String get presetSocialReason4 => 'I want to free up time';
+
+  @override
+  String get presetGamesReason1 => 'I want to regain control over my time';
+
+  @override
+  String get presetGamesReason2 => 'I want to do more useful things';
+
+  @override
+  String get presetGamesReason3 => 'I want to procrastinate less';
+
+  @override
+  String get presetGamesReason4 => 'I want to focus better';
+
+  @override
+  String get presetCustomReason1 => 'I want to improve my health';
+
+  @override
+  String get presetCustomReason2 => 'I want more energy';
+
+  @override
+  String get presetCustomReason3 => 'I want more control over myself';
+
+  @override
+  String get presetCustomReason4 => 'I want to change my life for the better';
 }

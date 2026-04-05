@@ -15,13 +15,14 @@ class HabitPresetPickerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final allPresets = buildHabitPresets(l10n);
 
-    final regularPresets = habitPresets
+    final regularPresets = allPresets
         .where((preset) => !preset.isCustom)
         .where((preset) => !excludedPresetKeys.contains(preset.keyName))
         .toList();
 
-    final customPreset = habitPresets.firstWhere((preset) => preset.isCustom);
+    final customPreset = allPresets.firstWhere((preset) => preset.isCustom);
     final hasRegularPresets = regularPresets.isNotEmpty;
 
     return Scaffold(
@@ -87,7 +88,7 @@ class HabitPresetPickerScreen extends StatelessWidget {
                       child: ListView.separated(
                         padding: EdgeInsets.zero,
                         itemCount: regularPresets.length,
-                        separatorBuilder: (_, separatorIndex) => const SizedBox(height: 14),
+                        separatorBuilder: (_, __) => const SizedBox(height: 14),
                         itemBuilder: (context, index) {
                           final preset = regularPresets[index];
                           return _HabitPresetTile(

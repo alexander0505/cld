@@ -132,4 +132,124 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get commonDelete => 'Удалить';
+
+  @override
+  String get presetAlcoholTitle => 'Алкоголь';
+
+  @override
+  String get presetSmokingTitle => 'Сигареты';
+
+  @override
+  String get presetSugarTitle => 'Сахар';
+
+  @override
+  String get presetCoffeeTitle => 'Кофе';
+
+  @override
+  String get presetPornTitle => 'Порно';
+
+  @override
+  String get presetSocialTitle => 'Соцсети';
+
+  @override
+  String get presetGamesTitle => 'Игры';
+
+  @override
+  String get presetCustomTitle => 'Своя привычка';
+
+  @override
+  String get presetAlcoholReason1 => 'Хочу лучше себя чувствовать';
+
+  @override
+  String get presetAlcoholReason2 => 'Хочу лучше спать';
+
+  @override
+  String get presetAlcoholReason3 => 'Хочу быть собраннее';
+
+  @override
+  String get presetAlcoholReason4 => 'Хочу больше контролировать свою жизнь';
+
+  @override
+  String get presetSmokingReason1 => 'Хочу улучшить здоровье';
+
+  @override
+  String get presetSmokingReason2 => 'Хочу легче дышать';
+
+  @override
+  String get presetSmokingReason3 => 'Хочу меньше тратить денег';
+
+  @override
+  String get presetSmokingReason4 => 'Хочу чувствовать себя свободнее';
+
+  @override
+  String get presetSugarReason1 => 'Хочу меньше скачков энергии';
+
+  @override
+  String get presetSugarReason2 => 'Хочу стабильное самочувствие';
+
+  @override
+  String get presetSugarReason3 => 'Хочу лучше питаться';
+
+  @override
+  String get presetSugarReason4 => 'Хочу похудеть';
+
+  @override
+  String get presetCoffeeReason1 => 'Хочу лучше спать';
+
+  @override
+  String get presetCoffeeReason2 => 'Хочу убрать тревожность';
+
+  @override
+  String get presetCoffeeReason3 => 'Хочу меньше зависеть от стимуляторов';
+
+  @override
+  String get presetCoffeeReason4 => 'Хочу стабильную энергию без кофеина';
+
+  @override
+  String get presetPornReason1 => 'Хочу больше самоконтроля';
+
+  @override
+  String get presetPornReason2 => 'Хочу больше энергии';
+
+  @override
+  String get presetPornReason3 => 'Хочу улучшить концентрацию';
+
+  @override
+  String get presetPornReason4 => 'Хочу вернуть ясность мышления';
+
+  @override
+  String get presetSocialReason1 => 'Хочу меньше отвлекаться';
+
+  @override
+  String get presetSocialReason2 => 'Хочу вернуть концентрацию';
+
+  @override
+  String get presetSocialReason3 => 'Хочу меньше зависеть от телефона';
+
+  @override
+  String get presetSocialReason4 => 'Хочу освободить время';
+
+  @override
+  String get presetGamesReason1 => 'Хочу вернуть контроль над временем';
+
+  @override
+  String get presetGamesReason2 => 'Хочу делать больше полезного';
+
+  @override
+  String get presetGamesReason3 => 'Хочу меньше прокрастинировать';
+
+  @override
+  String get presetGamesReason4 => 'Хочу лучше концентрироваться';
+
+  @override
+  String get presetCustomReason1 => 'Хочу улучшить здоровье';
+
+  @override
+  String get presetCustomReason2 => 'Хочу больше энергии';
+
+  @override
+  String get presetCustomReason3 => 'Хочу больше контроля над собой';
+
+  @override
+  String get presetCustomReason4 => 'Хочу изменить жизнь к лучшему';
 }

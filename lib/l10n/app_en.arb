@@ -38,5 +38,54 @@
   "detailsDeleteDialogTitle": "Delete habit?",
   "detailsDeleteDialogBody": "This action cannot be undone.",
   "commonCancel": "Cancel",
-  "commonDelete": "Delete"
+  "commonDelete": "Delete",
+
+  "presetAlcoholTitle": "Alcohol",
+  "presetSmokingTitle": "Smoking",
+  "presetSugarTitle": "Sugar",
+  "presetCoffeeTitle": "Coffee",
+  "presetPornTitle": "Porn",
+  "presetSocialTitle": "Social media",
+  "presetGamesTitle": "Games",
+  "presetCustomTitle": "Custom habit",
+
+  "presetAlcoholReason1": "I want to feel better",
+  "presetAlcoholReason2": "I want to sleep better",
+  "presetAlcoholReason3": "I want to feel more collected",
+  "presetAlcoholReason4": "I want more control over my life",
+
+  "presetSmokingReason1": "I want to improve my health",
+  "presetSmokingReason2": "I want to breathe more easily",
+  "presetSmokingReason3": "I want to spend less money",
+  "presetSmokingReason4": "I want to feel more free",
+
+  "presetSugarReason1": "I want fewer energy crashes",
+  "presetSugarReason2": "I want steadier well-being",
+  "presetSugarReason3": "I want to eat better",
+  "presetSugarReason4": "I want to lose weight",
+
+  "presetCoffeeReason1": "I want to sleep better",
+  "presetCoffeeReason2": "I want less anxiety",
+  "presetCoffeeReason3": "I want to rely less on stimulants",
+  "presetCoffeeReason4": "I want stable energy without caffeine",
+
+  "presetPornReason1": "I want more self-control",
+  "presetPornReason2": "I want more energy",
+  "presetPornReason3": "I want to improve focus",
+  "presetPornReason4": "I want to regain mental clarity",
+
+  "presetSocialReason1": "I want fewer distractions",
+  "presetSocialReason2": "I want to regain focus",
+  "presetSocialReason3": "I want to depend less on my phone",
+  "presetSocialReason4": "I want to free up time",
+
+  "presetGamesReason1": "I want to regain control over my time",
+  "presetGamesReason2": "I want to do more useful things",
+  "presetGamesReason3": "I want to procrastinate less",
+  "presetGamesReason4": "I want to focus better",
+
+  "presetCustomReason1": "I want to improve my health",
+  "presetCustomReason2": "I want more energy",
+  "presetCustomReason3": "I want more control over myself",
+  "presetCustomReason4": "I want to change my life for the better"
 }
