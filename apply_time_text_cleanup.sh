@@ -1,18 +1,465 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-python3 - <<'PY'
-from pathlib import Path
+mkdir -p lib/features/counters/presentation/widgets/scenes
+mkdir -p lib/features/counters/presentation/widgets/common
 
-path = Path("lib/features/counters/presentation/screen/counter_details_screen.dart")
-text = path.read_text(encoding="utf-8")
+cat > lib/features/counters/presentation/widgets/common/meditative_background.dart <<'EOF'
+import 'package:flutter/material.dart';
 
-old = "value: formatDateTime(localizedCounter.startAt),"
-new = "value: formatDateTime(localizedCounter.startAt, l10n),"
+class MeditativeBackground extends StatelessWidget {
+  final Widget child;
 
-if old not in text:
-    raise SystemExit("Target snippet not found. File may already be fixed or changed.")
+  const MeditativeBackground({
+    super.key,
+    required this.child,
+  });
 
-path.write_text(text.replace(old, new, 1), encoding="utf-8")
-print("Fixed counter_details_screen.dart")
-PY
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/ocean_bg.png'),
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
+        ),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.white.withValues(alpha: 0.08),
+              Colors.white.withValues(alpha: 0.14),
+              Colors.white.withValues(alpha: 0.10),
+            ],
+          ),
+        ),
+        child: child,
+      ),
+    );
+  }
+}
+EOF
+
+cat > lib/features/counters/presentation/widgets/scenes/add_habit_scene.dart <<'EOF'
+import 'package:flutter/material.dart';
+
+import '../../../../../core/l10n/l10n.dart';
+
+class AddHabitScene extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const AddHabitScene({
+    super.key,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(18, 28, 18, 18),
+      child: Column(
+        children: [
+          const Spacer(),
+          Text(
+            l10n.addHabitSceneTitle,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w800,
+              color: Color(0xFF22312B),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            l10n.addHabitSceneSubtitle,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 16,
+              height: 1.45,
+              color: Color(0xFF607066),
+            ),
+          ),
+          const SizedBox(height: 30),
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              width: 112,
+              height: 112,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withValues(alpha: 0.92),
+                border: Border.all(color: const Color(0xFFE6ECE6)),
+              ),
+              child: const Icon(
+                Icons.add,
+                size: 44,
+                color: Color(0xFF24A770),
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            l10n.addHabitSceneHint,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 14,
+              height: 1.4,
+              color: Color(0xFF748379),
+            ),
+          ),
+          const Spacer(),
+        ],
+      ),
+    );
+  }
+}
+EOF
+
+cat > lib/features/counters/presentation/widgets/scenes/empty_habits_scene.dart <<'EOF'
+import 'package:flutter/material.dart';
+
+import '../../../../../core/l10n/l10n.dart';
+
+class EmptyHabitsScene extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const EmptyHabitsScene({
+    super.key,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(18, 28, 18, 18),
+      child: Column(
+        children: [
+          const Spacer(),
+          Text(
+            l10n.emptyStateTitle,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w800,
+              color: Color(0xFF22312B),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            l10n.emptyStateSubtitle,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 16,
+              height: 1.45,
+              color: Color(0xFF607066),
+            ),
+          ),
+          const SizedBox(height: 30),
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              width: 112,
+              height: 112,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withValues(alpha: 0.92),
+                border: Border.all(color: const Color(0xFFE6ECE6)),
+              ),
+              child: const Icon(
+                Icons.add,
+                size: 44,
+                color: Color(0xFF24A770),
+              ),
+            ),
+          ),
+          const Spacer(),
+        ],
+      ),
+    );
+  }
+}
+EOF
+
+cat > lib/features/counters/presentation/widgets/common/page_indicator_dots.dart <<'EOF'
+import 'package:flutter/material.dart';
+
+class PageIndicatorDots extends StatelessWidget {
+  final int totalPages;
+  final int currentPage;
+
+  const PageIndicatorDots({
+    super.key,
+    required this.totalPages,
+    required this.currentPage,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(totalPages, (index) {
+        final isActive = index == currentPage;
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          width: isActive ? 22 : 8,
+          height: 8,
+          decoration: BoxDecoration(
+            color: isActive
+                ? const Color(0xFF24A770)
+                : const Color(0xFF24A770).withValues(alpha: 0.18),
+            borderRadius: BorderRadius.circular(999),
+          ),
+        );
+      }),
+    );
+  }
+}
+EOF
+
+cat > lib/features/counters/presentation/screen/counters_list_screen.dart <<'EOF'
+import 'package:flutter/material.dart';
+
+import '../../../../core/l10n/l10n.dart';
+import '../../data/counters_storage.dart';
+import '../../data/habit_presets.dart';
+import '../../models/counter_item.dart';
+import '../../models/habit_preset.dart';
+import '../widgets/common/meditative_background.dart';
+import '../widgets/common/page_indicator_dots.dart';
+import '../widgets/counter_card.dart';
+import '../widgets/scenes/add_habit_scene.dart';
+import '../widgets/scenes/empty_habits_scene.dart';
+import 'counter_details_screen.dart';
+import 'counter_form_screen.dart';
+import 'habit_preset_picker_screen.dart';
+
+class CountersListScreen extends StatefulWidget {
+  const CountersListScreen({super.key});
+
+  @override
+  State<CountersListScreen> createState() => _CountersListScreenState();
+}
+
+class _CountersListScreenState extends State<CountersListScreen> {
+  final CountersStorage _storage = CountersStorage();
+  final PageController _pageController = PageController(viewportFraction: 0.96);
+
+  List<CounterItem> _counters = [];
+  bool _isLoading = true;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCounters();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _loadCounters() async {
+    final items = await _storage.loadCounters();
+    if (!mounted) return;
+
+    setState(() {
+      _counters = items;
+      _isLoading = false;
+    });
+  }
+
+  Future<void> _persistCounters() {
+    return _storage.saveCounters(_counters);
+  }
+
+  void _addCounter(CounterItem item) {
+    setState(() {
+      _counters.add(item);
+    });
+    _persistCounters();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      _pageController.animateToPage(
+        _counters.length - 1,
+        duration: const Duration(milliseconds: 280),
+        curve: Curves.easeOut,
+      );
+    });
+  }
+
+  void _updateCounter(CounterItem updated) {
+    setState(() {
+      final index = _counters.indexWhere((e) => e.id == updated.id);
+      if (index != -1) {
+        _counters[index] = updated;
+      }
+    });
+    _persistCounters();
+  }
+
+  void _deleteCounter(String id) {
+    setState(() {
+      _counters.removeWhere((e) => e.id == id);
+
+      if (_currentPage > 0 && _currentPage >= _counters.length) {
+        _currentPage = _counters.length - 1;
+      }
+
+      if (_counters.isEmpty) {
+        _currentPage = 0;
+      }
+    });
+
+    _persistCounters();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+
+      final targetPage =
+          _counters.isEmpty ? 0 : _currentPage.clamp(0, _counters.length - 1);
+
+      _pageController.jumpToPage(targetPage);
+    });
+  }
+
+  void _resetCounter(String id) {
+    setState(() {
+      final index = _counters.indexWhere((e) => e.id == id);
+      if (index != -1) {
+        _counters[index] = _counters[index].copyWith(startAt: DateTime.now());
+      }
+    });
+    _persistCounters();
+  }
+
+  Future<void> _openCreateFlow() async {
+    final excludedPresetKeys = _counters
+        .map((item) => item.presetKey)
+        .whereType<String>()
+        .where((key) => key.isNotEmpty && key != 'custom')
+        .toSet();
+
+    final preset = await Navigator.of(context).push<HabitPreset>(
+      MaterialPageRoute(
+        builder: (_) => HabitPresetPickerScreen(
+          excludedPresetKeys: excludedPresetKeys,
+        ),
+      ),
+    );
+
+    if (!mounted || preset == null) return;
+
+    final result = await Navigator.of(context).push<CounterItem>(
+      MaterialPageRoute(
+        builder: (_) => CounterFormScreen(preset: preset),
+      ),
+    );
+
+    if (result != null) {
+      _addCounter(result);
+    }
+  }
+
+  Future<void> _openDetails(CounterItem item) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => CounterDetailsScreen(
+          counter: item,
+          onSave: _updateCounter,
+          onDelete: _deleteCounter,
+          onReset: _resetCounter,
+        ),
+      ),
+    );
+
+    if (!mounted) return;
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
+    if (_isLoading) {
+      return const Scaffold(
+        backgroundColor: Color(0xFFF7FAFB),
+        body: MeditativeBackground(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      );
+    }
+
+    final localizedCounters = _counters
+        .map((item) => localizeCounterItem(item, l10n))
+        .toList();
+
+    final hasItems = localizedCounters.isNotEmpty;
+    final totalPages = hasItems ? localizedCounters.length + 1 : 1;
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFF7FAFB),
+      body: MeditativeBackground(
+        child: SafeArea(
+          child: hasItems
+              ? Column(
+                  children: [
+                    const SizedBox(height: 22),
+                    Expanded(
+                      child: PageView.builder(
+                        controller: _pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentPage = index;
+                          });
+                        },
+                        itemCount: totalPages,
+                        itemBuilder: (context, index) {
+                          if (index == localizedCounters.length) {
+                            return AddHabitScene(
+                              onTap: _openCreateFlow,
+                            );
+                          }
+
+                          final item = localizedCounters[index];
+                          return Padding(
+                            padding: const EdgeInsets.fromLTRB(14, 22, 14, 18),
+                            child: CounterCard(
+                              item: item,
+                              onTap: () => _openDetails(_counters[index]),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
+                      child: PageIndicatorDots(
+                        totalPages: totalPages,
+                        currentPage: _currentPage,
+                      ),
+                    ),
+                  ],
+                )
+              : EmptyHabitsScene(
+                  onTap: _openCreateFlow,
+                ),
+        ),
+      ),
+    );
+  }
+}
+EOF
