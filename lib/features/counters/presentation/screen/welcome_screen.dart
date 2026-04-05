@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../data/counters_storage.dart';
 import 'counters_list_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -12,20 +13,27 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  final CountersStorage _storage = CountersStorage();
   Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer(const Duration(seconds: 3), () {
-      if (!mounted) return;
-
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (_) => const CountersListScreen(),
-        ),
-      );
+    _timer = Timer(const Duration(seconds: 3), () async {
+      await _finishWelcome();
     });
+  }
+
+  Future<void> _finishWelcome() async {
+    await _storage.markWelcomeSeen();
+
+    if (!mounted) return;
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => const CountersListScreen(),
+      ),
+    );
   }
 
   @override
@@ -93,7 +101,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                     const SizedBox(height: 12),
                     const Text(
-                      'Спокойно отслеживай свой прогресс\nи начинай заново без лишнего шума.',
+                      'Спокойно наблюдай за своим прогрессом\nи возвращайся к себе без лишнего шума.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16,

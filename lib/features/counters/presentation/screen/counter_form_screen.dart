@@ -121,7 +121,7 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
   @override
   Widget build(BuildContext context) {
     final titleText = isEdit ? 'Изменить привычку' : 'Новая привычка';
-    final actionText = isEdit ? 'Сохранить привычку' : 'Начать привычку';
+    final actionText = isEdit ? 'Сохранить изменения' : 'Начать отсчёт';
 
     return Scaffold(
       body: Container(
@@ -212,7 +212,7 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                             ),
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
-                                return 'Введите название привычки';
+                                return 'Укажи название привычки';
                               }
                               return null;
                             },
@@ -221,7 +221,7 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                           TextFormField(
                             controller: _emojiController,
                             decoration: _inputDecoration(
-                              label: 'Emoji',
+                              label: 'Эмодзи',
                               hint: 'Например: 🚭',
                             ),
                           ),
@@ -236,7 +236,7 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Когда начать',
+                          'Точка отсчёта',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
@@ -344,7 +344,7 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                           maxLines: 4,
                           decoration: _inputDecoration(
                             label: 'Своя причина',
-                            hint: 'Почему ты хочешь начать именно сейчас?',
+                            hint: 'Почему тебе хочется начать именно сейчас?',
                           ),
                           onChanged: (_) {
                             if (_selectedReason != null) {

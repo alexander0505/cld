@@ -197,7 +197,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
           ),
           const SizedBox(height: 10),
           const Text(
-            'Добавь новую привычку и начни новый отсчёт.',
+            'Добавь новую привычку и начни новый путь в своём ритме.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -225,7 +225,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
           ),
           const SizedBox(height: 24),
           const Text(
-            'Свайпни обратно, чтобы вернуться к текущим привычкам.',
+            'Свайпни назад, чтобы вернуться к своим привычкам.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -246,7 +246,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
         children: [
           const Spacer(),
           const Text(
-            'Твоя первая привычка',
+            'Первая привычка',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 30,
@@ -256,7 +256,7 @@ class _CountersListScreenState extends State<CountersListScreen> {
           ),
           const SizedBox(height: 10),
           const Text(
-            'Начни отслеживать прогресс с одной привычки.',
+            'Начни с одной привычки и просто наблюдай за своим прогрессом.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,

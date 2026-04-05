@@ -69,8 +69,8 @@ class HabitPresetPickerScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   Text(
                     hasRegularPresets
-                        ? 'Выбери, с чего хочешь начать.\nМожно выбрать готовый вариант или создать свой.'
-                        : 'Все готовые привычки уже добавлены.\nМожно создать свой вариант.',
+                        ? 'Выбери, с чего хочешь начать.\nМожно взять готовый вариант или создать свой.'
+                        : 'Все готовые привычки уже выбраны.\nМожно создать свой вариант.',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 16,
@@ -212,7 +212,7 @@ class _CustomHabitTile extends StatelessWidget {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        'Создай новый вариант вручную',
+                        'Создай свой вариант вручную',
                         style: TextStyle(
                           fontSize: 14,
                           height: 1.35,

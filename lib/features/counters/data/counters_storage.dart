@@ -6,6 +6,7 @@ import '../models/counter_item.dart';
 
 class CountersStorage {
   static const _storageKey = 'counters';
+  static const _hasSeenWelcomeKey = 'has_seen_welcome';
 
   Future<List<CounterItem>> loadCounters() async {
     final prefs = await SharedPreferences.getInstance();
@@ -27,5 +28,15 @@ class CountersStorage {
       counters.map((item) => item.toJson()).toList(),
     );
     await prefs.setString(_storageKey, encoded);
+  }
+
+  Future<bool> hasSeenWelcome() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_hasSeenWelcomeKey) ?? false;
+  }
+
+  Future<void> markWelcomeSeen() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_hasSeenWelcomeKey, true);
   }
 }
