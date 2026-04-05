@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../../core/l10n/l10n.dart';
 import '../../models/counter_item.dart';
 import '../../models/habit_preset.dart';
-import '../../utils/date_formatters.dart';
+import '../widgets/form/custom_habit_fields_section.dart';
+import '../widgets/form/reason_section.dart';
+import '../widgets/form/selected_habit_block.dart';
+import '../widgets/form/start_point_section.dart';
 
 class CounterFormScreen extends StatefulWidget {
   final CounterItem? existing;
@@ -100,6 +103,14 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
     });
   }
 
+  void _handleReasonChanged(String _) {
+    if (_selectedReason != null) {
+      setState(() {
+        _selectedReason = null;
+      });
+    }
+  }
+
   void _save() {
     if (!_formKey.currentState!.validate()) return;
 
@@ -183,184 +194,35 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
                     ),
                   ),
                   const SizedBox(height: 28),
-
                   if (!isCustomPreset) ...[
-                    _SelectedHabitBlock(
+                    SelectedHabitBlock(
                       emoji: widget.preset.emoji,
                       title: widget.preset.title,
                     ),
                     const SizedBox(height: 18),
                   ],
-
                   if (isCustomPreset) ...[
-                    _SectionCard(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            l10n.formCustomHabitBlockTitle,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                              color: Color(0xFF22312B),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            controller: _titleController,
-                            decoration: _inputDecoration(
-                              label: l10n.formHabitNameLabel,
-                              hint: l10n.formHabitNameHint,
-                            ),
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return l10n.formHabitNameValidation;
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 14),
-                          TextFormField(
-                            controller: _emojiController,
-                            decoration: _inputDecoration(
-                              label: l10n.formEmojiLabel,
-                              hint: l10n.formEmojiHint,
-                            ),
-                          ),
-                        ],
-                      ),
+                    CustomHabitFieldsSection(
+                      titleController: _titleController,
+                      emojiController: _emojiController,
+                      inputDecorationBuilder: _inputDecoration,
                     ),
                     const SizedBox(height: 18),
                   ],
-
-                  _SectionCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          l10n.formStartPointTitle,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF22312B),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        InkWell(
-                          borderRadius: BorderRadius.circular(22),
-                          onTap: _pickDateTime,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 18,
-                              vertical: 18,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(22),
-                              color: Colors.white.withValues(alpha: 0.58),
-                            ),
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.schedule,
-                                  color: Color(0xFF24A770),
-                                ),
-                                const SizedBox(width: 14),
-                                Expanded(
-                                  child: Text(
-                                    formatDateTime(_startAt, l10n),
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xFF22312B),
-                                    ),
-                                  ),
-                                ),
-                                const Icon(
-                                  Icons.chevron_right,
-                                  color: Color(0xFF748379),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  StartPointSection(
+                    startAt: _startAt,
+                    onTap: _pickDateTime,
                   ),
                   const SizedBox(height: 18),
-
-                  _SectionCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          l10n.formWhyTitle,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF22312B),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Wrap(
-                          spacing: 10,
-                          runSpacing: 10,
-                          children: reasons.map((reason) {
-                            final isSelected = _selectedReason == reason;
-                            return GestureDetector(
-                              onTap: () => _selectReason(reason),
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 180),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(999),
-                                  color: isSelected
-                                      ? const Color(0xFF24A770).withValues(alpha: 0.18)
-                                      : Colors.white.withValues(alpha: 0.42),
-                                  border: Border.all(
-                                    color: isSelected
-                                        ? const Color(0xFF24A770)
-                                        : Colors.transparent,
-                                  ),
-                                ),
-                                child: Text(
-                                  reason,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    height: 1.35,
-                                    fontWeight: isSelected
-                                        ? FontWeight.w600
-                                        : FontWeight.w500,
-                                    color: const Color(0xFF22312B),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                        const SizedBox(height: 18),
-                        TextFormField(
-                          controller: _reasonController,
-                          maxLines: 4,
-                          decoration: _inputDecoration(
-                            label: l10n.formCustomReasonLabel,
-                            hint: l10n.formCustomReasonHint,
-                          ),
-                          onChanged: (_) {
-                            if (_selectedReason != null) {
-                              setState(() {
-                                _selectedReason = null;
-                              });
-                            }
-                          },
-                        ),
-                      ],
-                    ),
+                  ReasonSection(
+                    reasons: reasons,
+                    selectedReason: _selectedReason,
+                    reasonController: _reasonController,
+                    onSelectReason: _selectReason,
+                    onReasonChanged: _handleReasonChanged,
+                    inputDecorationBuilder: _inputDecoration,
                   ),
                   const SizedBox(height: 26),
-
                   SizedBox(
                     width: double.infinity,
                     child: FilledButton(
@@ -416,61 +278,6 @@ class _CounterFormScreenState extends State<CounterFormScreen> {
       ),
       labelStyle: const TextStyle(color: Color(0xFF607066)),
       hintStyle: const TextStyle(color: Color(0xFF8A9790)),
-    );
-  }
-}
-
-class _SelectedHabitBlock extends StatelessWidget {
-  final String emoji;
-  final String title;
-
-  const _SelectedHabitBlock({
-    required this.emoji,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return _SectionCard(
-      child: Row(
-        children: [
-          Text(
-            emoji,
-            style: const TextStyle(fontSize: 34),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF22312B),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SectionCard extends StatelessWidget {
-  final Widget child;
-
-  const _SectionCard({
-    required this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28),
-        color: Colors.white.withValues(alpha: 0.24),
-      ),
-      child: child,
     );
   }
 }

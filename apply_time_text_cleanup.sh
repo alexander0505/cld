@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-mkdir -p lib/features/counters/presentation/widgets/scenes
-mkdir -p lib/features/counters/presentation/widgets/common
+mkdir -p lib/features/counters/presentation/widgets/form
 
-cat > lib/features/counters/presentation/widgets/common/meditative_background.dart <<'EOF'
+cat > lib/features/counters/presentation/widgets/form/section_card.dart <<'EOF'
 import 'package:flutter/material.dart';
 
-class MeditativeBackground extends StatelessWidget {
+class SectionCard extends StatelessWidget {
   final Widget child;
 
-  const MeditativeBackground({
+  const SectionCard({
     super.key,
     required this.child,
   });
@@ -18,102 +17,52 @@ class MeditativeBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/ocean_bg.png'),
-          fit: BoxFit.cover,
-          alignment: Alignment.center,
-        ),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        color: Colors.white.withValues(alpha: 0.24),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.white.withValues(alpha: 0.08),
-              Colors.white.withValues(alpha: 0.14),
-              Colors.white.withValues(alpha: 0.10),
-            ],
-          ),
-        ),
-        child: child,
-      ),
+      child: child,
     );
   }
 }
 EOF
 
-cat > lib/features/counters/presentation/widgets/scenes/add_habit_scene.dart <<'EOF'
+cat > lib/features/counters/presentation/widgets/form/selected_habit_block.dart <<'EOF'
 import 'package:flutter/material.dart';
 
-import '../../../../../core/l10n/l10n.dart';
+import 'section_card.dart';
 
-class AddHabitScene extends StatelessWidget {
-  final VoidCallback onTap;
+class SelectedHabitBlock extends StatelessWidget {
+  final String emoji;
+  final String title;
 
-  const AddHabitScene({
+  const SelectedHabitBlock({
     super.key,
-    required this.onTap,
+    required this.emoji,
+    required this.title,
   });
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(18, 28, 18, 18),
-      child: Column(
+    return SectionCard(
+      child: Row(
         children: [
-          const Spacer(),
           Text(
-            l10n.addHabitSceneTitle,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w800,
-              color: Color(0xFF22312B),
-            ),
+            emoji,
+            style: const TextStyle(fontSize: 34),
           ),
-          const SizedBox(height: 10),
-          Text(
-            l10n.addHabitSceneSubtitle,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16,
-              height: 1.45,
-              color: Color(0xFF607066),
-            ),
-          ),
-          const SizedBox(height: 30),
-          GestureDetector(
-            onTap: onTap,
-            child: Container(
-              width: 112,
-              height: 112,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withValues(alpha: 0.92),
-                border: Border.all(color: const Color(0xFFE6ECE6)),
-              ),
-              child: const Icon(
-                Icons.add,
-                size: 44,
-                color: Color(0xFF24A770),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF22312B),
               ),
             ),
           ),
-          const SizedBox(height: 24),
-          Text(
-            l10n.addHabitSceneHint,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 14,
-              height: 1.4,
-              color: Color(0xFF748379),
-            ),
-          ),
-          const Spacer(),
         ],
       ),
     );
@@ -121,66 +70,65 @@ class AddHabitScene extends StatelessWidget {
 }
 EOF
 
-cat > lib/features/counters/presentation/widgets/scenes/empty_habits_scene.dart <<'EOF'
+cat > lib/features/counters/presentation/widgets/form/custom_habit_fields_section.dart <<'EOF'
 import 'package:flutter/material.dart';
 
 import '../../../../../core/l10n/l10n.dart';
+import 'section_card.dart';
 
-class EmptyHabitsScene extends StatelessWidget {
-  final VoidCallback onTap;
+class CustomHabitFieldsSection extends StatelessWidget {
+  final TextEditingController titleController;
+  final TextEditingController emojiController;
+  final InputDecoration Function({
+    required String label,
+    required String hint,
+  }) inputDecorationBuilder;
 
-  const EmptyHabitsScene({
+  const CustomHabitFieldsSection({
     super.key,
-    required this.onTap,
+    required this.titleController,
+    required this.emojiController,
+    required this.inputDecorationBuilder,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(18, 28, 18, 18),
+    return SectionCard(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Spacer(),
           Text(
-            l10n.emptyStateTitle,
-            textAlign: TextAlign.center,
+            l10n.formCustomHabitBlockTitle,
             style: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w800,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
               color: Color(0xFF22312B),
             ),
           ),
-          const SizedBox(height: 10),
-          Text(
-            l10n.emptyStateSubtitle,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16,
-              height: 1.45,
-              color: Color(0xFF607066),
+          const SizedBox(height: 16),
+          TextFormField(
+            controller: titleController,
+            decoration: inputDecorationBuilder(
+              label: l10n.formHabitNameLabel,
+              hint: l10n.formHabitNameHint,
+            ),
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return l10n.formHabitNameValidation;
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 14),
+          TextFormField(
+            controller: emojiController,
+            decoration: inputDecorationBuilder(
+              label: l10n.formEmojiLabel,
+              hint: l10n.formEmojiHint,
             ),
           ),
-          const SizedBox(height: 30),
-          GestureDetector(
-            onTap: onTap,
-            child: Container(
-              width: 112,
-              height: 112,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withValues(alpha: 0.92),
-                border: Border.all(color: const Color(0xFFE6ECE6)),
-              ),
-              child: const Icon(
-                Icons.add,
-                size: 44,
-                color: Color(0xFF24A770),
-              ),
-            ),
-          ),
-          const Spacer(),
         ],
       ),
     );
@@ -188,277 +136,465 @@ class EmptyHabitsScene extends StatelessWidget {
 }
 EOF
 
-cat > lib/features/counters/presentation/widgets/common/page_indicator_dots.dart <<'EOF'
+cat > lib/features/counters/presentation/widgets/form/start_point_section.dart <<'EOF'
 import 'package:flutter/material.dart';
 
-class PageIndicatorDots extends StatelessWidget {
-  final int totalPages;
-  final int currentPage;
+import '../../../../../core/l10n/l10n.dart';
+import '../../../utils/date_formatters.dart';
+import 'section_card.dart';
 
-  const PageIndicatorDots({
+class StartPointSection extends StatelessWidget {
+  final DateTime startAt;
+  final VoidCallback onTap;
+
+  const StartPointSection({
     super.key,
-    required this.totalPages,
-    required this.currentPage,
+    required this.startAt,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(totalPages, (index) {
-        final isActive = index == currentPage;
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          width: isActive ? 22 : 8,
-          height: 8,
-          decoration: BoxDecoration(
-            color: isActive
-                ? const Color(0xFF24A770)
-                : const Color(0xFF24A770).withValues(alpha: 0.18),
-            borderRadius: BorderRadius.circular(999),
+    final l10n = context.l10n;
+
+    return SectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.formStartPointTitle,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF22312B),
+            ),
           ),
-        );
-      }),
+          const SizedBox(height: 16),
+          InkWell(
+            borderRadius: BorderRadius.circular(22),
+            onTap: onTap,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 18,
+                vertical: 18,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(22),
+                color: Colors.white.withValues(alpha: 0.58),
+              ),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.schedule,
+                    color: Color(0xFF24A770),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Text(
+                      formatDateTime(startAt, l10n),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF22312B),
+                      ),
+                    ),
+                  ),
+                  const Icon(
+                    Icons.chevron_right,
+                    color: Color(0xFF748379),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
 EOF
 
-cat > lib/features/counters/presentation/screen/counters_list_screen.dart <<'EOF'
+cat > lib/features/counters/presentation/widgets/form/reason_section.dart <<'EOF'
+import 'package:flutter/material.dart';
+
+import '../../../../../core/l10n/l10n.dart';
+import 'section_card.dart';
+
+class ReasonSection extends StatelessWidget {
+  final List<String> reasons;
+  final String? selectedReason;
+  final TextEditingController reasonController;
+  final ValueChanged<String> onSelectReason;
+  final ValueChanged<String> onReasonChanged;
+  final InputDecoration Function({
+    required String label,
+    required String hint,
+  }) inputDecorationBuilder;
+
+  const ReasonSection({
+    super.key,
+    required this.reasons,
+    required this.selectedReason,
+    required this.reasonController,
+    required this.onSelectReason,
+    required this.onReasonChanged,
+    required this.inputDecorationBuilder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
+    return SectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.formWhyTitle,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF22312B),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: reasons.map((reason) {
+              final isSelected = selectedReason == reason;
+              return GestureDetector(
+                onTap: () => onSelectReason(reason),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 180),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(999),
+                    color: isSelected
+                        ? const Color(0xFF24A770).withValues(alpha: 0.18)
+                        : Colors.white.withValues(alpha: 0.42),
+                    border: Border.all(
+                      color: isSelected
+                          ? const Color(0xFF24A770)
+                          : Colors.transparent,
+                    ),
+                  ),
+                  child: Text(
+                    reason,
+                    style: TextStyle(
+                      fontSize: 14,
+                      height: 1.35,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.w500,
+                      color: const Color(0xFF22312B),
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 18),
+          TextFormField(
+            controller: reasonController,
+            maxLines: 4,
+            decoration: inputDecorationBuilder(
+              label: l10n.formCustomReasonLabel,
+              hint: l10n.formCustomReasonHint,
+            ),
+            onChanged: onReasonChanged,
+          ),
+        ],
+      ),
+    );
+  }
+}
+EOF
+
+cat > lib/features/counters/presentation/screen/counter_form_screen.dart <<'EOF'
 import 'package:flutter/material.dart';
 
 import '../../../../core/l10n/l10n.dart';
-import '../../data/counters_storage.dart';
-import '../../data/habit_presets.dart';
 import '../../models/counter_item.dart';
 import '../../models/habit_preset.dart';
-import '../widgets/common/meditative_background.dart';
-import '../widgets/common/page_indicator_dots.dart';
-import '../widgets/counter_card.dart';
-import '../widgets/scenes/add_habit_scene.dart';
-import '../widgets/scenes/empty_habits_scene.dart';
-import 'counter_details_screen.dart';
-import 'counter_form_screen.dart';
-import 'habit_preset_picker_screen.dart';
+import '../widgets/form/custom_habit_fields_section.dart';
+import '../widgets/form/reason_section.dart';
+import '../widgets/form/selected_habit_block.dart';
+import '../widgets/form/start_point_section.dart';
 
-class CountersListScreen extends StatefulWidget {
-  const CountersListScreen({super.key});
+class CounterFormScreen extends StatefulWidget {
+  final CounterItem? existing;
+  final HabitPreset preset;
+
+  const CounterFormScreen({
+    super.key,
+    this.existing,
+    required this.preset,
+  });
 
   @override
-  State<CountersListScreen> createState() => _CountersListScreenState();
+  State<CounterFormScreen> createState() => _CounterFormScreenState();
 }
 
-class _CountersListScreenState extends State<CountersListScreen> {
-  final CountersStorage _storage = CountersStorage();
-  final PageController _pageController = PageController(viewportFraction: 0.96);
+class _CounterFormScreenState extends State<CounterFormScreen> {
+  final _formKey = GlobalKey<FormState>();
+  late final TextEditingController _titleController;
+  late final TextEditingController _emojiController;
+  late final TextEditingController _reasonController;
 
-  List<CounterItem> _counters = [];
-  bool _isLoading = true;
-  int _currentPage = 0;
+  late DateTime _startAt;
+  String? _selectedReason;
+
+  bool get isEdit => widget.existing != null;
+  bool get isCustomPreset => widget.preset.isCustom;
+
+  List<String> get reasons => widget.preset.reasons;
 
   @override
   void initState() {
     super.initState();
-    _loadCounters();
+    final existing = widget.existing;
+
+    _titleController = TextEditingController(
+      text: existing?.title ?? widget.preset.title,
+    );
+    _emojiController = TextEditingController(
+      text: existing?.emoji ?? widget.preset.emoji,
+    );
+    _reasonController = TextEditingController(
+      text: existing?.reason ?? '',
+    );
+
+    _startAt = existing?.startAt ?? DateTime.now();
+
+    if (existing != null &&
+        existing.reason.isNotEmpty &&
+        reasons.contains(existing.reason)) {
+      _selectedReason = existing.reason;
+    }
   }
 
   @override
   void dispose() {
-    _pageController.dispose();
+    _titleController.dispose();
+    _emojiController.dispose();
+    _reasonController.dispose();
     super.dispose();
   }
 
-  Future<void> _loadCounters() async {
-    final items = await _storage.loadCounters();
-    if (!mounted) return;
+  Future<void> _pickDateTime() async {
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: _startAt,
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+    );
+
+    if (pickedDate == null || !mounted) return;
+
+    final pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(_startAt),
+    );
+
+    if (pickedTime == null) return;
 
     setState(() {
-      _counters = items;
-      _isLoading = false;
-    });
-  }
-
-  Future<void> _persistCounters() {
-    return _storage.saveCounters(_counters);
-  }
-
-  void _addCounter(CounterItem item) {
-    setState(() {
-      _counters.add(item);
-    });
-    _persistCounters();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      _pageController.animateToPage(
-        _counters.length - 1,
-        duration: const Duration(milliseconds: 280),
-        curve: Curves.easeOut,
+      _startAt = DateTime(
+        pickedDate.year,
+        pickedDate.month,
+        pickedDate.day,
+        pickedTime.hour,
+        pickedTime.minute,
       );
     });
   }
 
-  void _updateCounter(CounterItem updated) {
+  void _selectReason(String reason) {
     setState(() {
-      final index = _counters.indexWhere((e) => e.id == updated.id);
-      if (index != -1) {
-        _counters[index] = updated;
-      }
-    });
-    _persistCounters();
-  }
-
-  void _deleteCounter(String id) {
-    setState(() {
-      _counters.removeWhere((e) => e.id == id);
-
-      if (_currentPage > 0 && _currentPage >= _counters.length) {
-        _currentPage = _counters.length - 1;
-      }
-
-      if (_counters.isEmpty) {
-        _currentPage = 0;
-      }
-    });
-
-    _persistCounters();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-
-      final targetPage =
-          _counters.isEmpty ? 0 : _currentPage.clamp(0, _counters.length - 1);
-
-      _pageController.jumpToPage(targetPage);
+      _selectedReason = reason;
+      _reasonController.text = reason;
     });
   }
 
-  void _resetCounter(String id) {
-    setState(() {
-      final index = _counters.indexWhere((e) => e.id == id);
-      if (index != -1) {
-        _counters[index] = _counters[index].copyWith(startAt: DateTime.now());
-      }
-    });
-    _persistCounters();
-  }
-
-  Future<void> _openCreateFlow() async {
-    final excludedPresetKeys = _counters
-        .map((item) => item.presetKey)
-        .whereType<String>()
-        .where((key) => key.isNotEmpty && key != 'custom')
-        .toSet();
-
-    final preset = await Navigator.of(context).push<HabitPreset>(
-      MaterialPageRoute(
-        builder: (_) => HabitPresetPickerScreen(
-          excludedPresetKeys: excludedPresetKeys,
-        ),
-      ),
-    );
-
-    if (!mounted || preset == null) return;
-
-    final result = await Navigator.of(context).push<CounterItem>(
-      MaterialPageRoute(
-        builder: (_) => CounterFormScreen(preset: preset),
-      ),
-    );
-
-    if (result != null) {
-      _addCounter(result);
+  void _handleReasonChanged(String _) {
+    if (_selectedReason != null) {
+      setState(() {
+        _selectedReason = null;
+      });
     }
   }
 
-  Future<void> _openDetails(CounterItem item) async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => CounterDetailsScreen(
-          counter: item,
-          onSave: _updateCounter,
-          onDelete: _deleteCounter,
-          onReset: _resetCounter,
-        ),
-      ),
+  void _save() {
+    if (!_formKey.currentState!.validate()) return;
+
+    final now = DateTime.now();
+
+    final item = CounterItem(
+      id: widget.existing?.id ?? now.microsecondsSinceEpoch.toString(),
+      title: _titleController.text.trim(),
+      emoji: _emojiController.text.trim().isEmpty
+          ? '💪'
+          : _emojiController.text.trim(),
+      startAt: _startAt,
+      reason: _reasonController.text.trim(),
+      presetKey: widget.preset.keyName,
     );
 
-    if (!mounted) return;
-    setState(() {});
+    Navigator.of(context).pop(item);
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-
-    if (_isLoading) {
-      return const Scaffold(
-        backgroundColor: Color(0xFFF7FAFB),
-        body: MeditativeBackground(
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
-      );
-    }
-
-    final localizedCounters = _counters
-        .map((item) => localizeCounterItem(item, l10n))
-        .toList();
-
-    final hasItems = localizedCounters.isNotEmpty;
-    final totalPages = hasItems ? localizedCounters.length + 1 : 1;
+    final titleText = isEdit ? l10n.formEditTitle : l10n.formCreateTitle;
+    final actionText = isEdit ? l10n.formActionSave : l10n.formActionStart;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF7FAFB),
-      body: MeditativeBackground(
-        child: SafeArea(
-          child: hasItems
-              ? Column(
-                  children: [
-                    const SizedBox(height: 22),
-                    Expanded(
-                      child: PageView.builder(
-                        controller: _pageController,
-                        onPageChanged: (index) {
-                          setState(() {
-                            _currentPage = index;
-                          });
-                        },
-                        itemCount: totalPages,
-                        itemBuilder: (context, index) {
-                          if (index == localizedCounters.length) {
-                            return AddHabitScene(
-                              onTap: _openCreateFlow,
-                            );
-                          }
-
-                          final item = localizedCounters[index];
-                          return Padding(
-                            padding: const EdgeInsets.fromLTRB(14, 22, 14, 18),
-                            child: CounterCard(
-                              item: item,
-                              onTap: () => _openDetails(_counters[index]),
-                            ),
-                          );
-                        },
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/ocean_bg.png'),
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
+          ),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.white.withValues(alpha: 0.10),
+                Colors.white.withValues(alpha: 0.16),
+                Colors.white.withValues(alpha: 0.12),
+              ],
+            ),
+          ),
+          child: SafeArea(
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: const Icon(Icons.arrow_back_ios_new),
+                        color: const Color(0xFF4E5C56),
                       ),
+                      const Expanded(child: SizedBox()),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    titleText,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF22312B),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
-                      child: PageIndicatorDots(
-                        totalPages: totalPages,
-                        currentPage: _currentPage,
-                      ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    l10n.formSubtitle,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      height: 1.45,
+                      color: Color(0xFF607066),
                     ),
+                  ),
+                  const SizedBox(height: 28),
+                  if (!isCustomPreset) ...[
+                    SelectedHabitBlock(
+                      emoji: widget.preset.emoji,
+                      title: widget.preset.title,
+                    ),
+                    const SizedBox(height: 18),
                   ],
-                )
-              : EmptyHabitsScene(
-                  onTap: _openCreateFlow,
-                ),
+                  if (isCustomPreset) ...[
+                    CustomHabitFieldsSection(
+                      titleController: _titleController,
+                      emojiController: _emojiController,
+                      inputDecorationBuilder: _inputDecoration,
+                    ),
+                    const SizedBox(height: 18),
+                  ],
+                  StartPointSection(
+                    startAt: _startAt,
+                    onTap: _pickDateTime,
+                  ),
+                  const SizedBox(height: 18),
+                  ReasonSection(
+                    reasons: reasons,
+                    selectedReason: _selectedReason,
+                    reasonController: _reasonController,
+                    onSelectReason: _selectReason,
+                    onReasonChanged: _handleReasonChanged,
+                    inputDecorationBuilder: _inputDecoration,
+                  ),
+                  const SizedBox(height: 26),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      style: FilledButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 18),
+                        backgroundColor: const Color(0xFF24A770),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(22),
+                        ),
+                      ),
+                      onPressed: _save,
+                      child: Text(
+                        actionText,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
+    );
+  }
+
+  InputDecoration _inputDecoration({
+    required String label,
+    required String hint,
+  }) {
+    return InputDecoration(
+      labelText: label,
+      hintText: hint,
+      filled: true,
+      fillColor: Colors.white.withValues(alpha: 0.58),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(18),
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(18),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(18),
+        borderSide: const BorderSide(
+          color: Color(0xFF24A770),
+          width: 1.4,
+        ),
+      ),
+      labelStyle: const TextStyle(color: Color(0xFF607066)),
+      hintStyle: const TextStyle(color: Color(0xFF8A9790)),
     );
   }
 }
