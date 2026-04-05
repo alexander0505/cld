@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/l10n/l10n.dart';
 import '../../data/habit_presets.dart';
+import '../../data/habit_presets.dart' show localizeCounterItem;
 import '../../models/counter_item.dart';
 import '../../utils/date_formatters.dart';
+import '../widgets/details/destructive_actions.dart';
+import '../widgets/details/info_block.dart';
 import 'counter_form_screen.dart';
 
 class CounterDetailsScreen extends StatefulWidget {
@@ -55,60 +58,70 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
     }
   }
 
-  Future<void> _confirmReset() async {
+  Future<bool> _showResetDialog() async {
     final l10n = context.l10n;
 
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text(l10n.detailsResetDialogTitle),
-        content: Text(l10n.detailsResetDialogBody),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: Text(l10n.commonCancel),
+    return await showDialog<bool>(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text(l10n.detailsResetDialogTitle),
+            content: Text(l10n.detailsResetDialogBody),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: Text(l10n.commonCancel),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: Text(l10n.detailsResetAction),
+              ),
+            ],
           ),
-          FilledButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: Text(l10n.detailsResetAction),
-          ),
-        ],
-      ),
-    );
+        ) ??
+        false;
+  }
 
-    if (confirmed == true) {
-      widget.onReset(_counter.id);
-      setState(() {
-        _counter = _counter.copyWith(startAt: DateTime.now());
-      });
-    }
+  Future<bool> _showDeleteDialog() async {
+    final l10n = context.l10n;
+
+    return await showDialog<bool>(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text(l10n.detailsDeleteDialogTitle),
+            content: Text(l10n.detailsDeleteDialogBody),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: Text(l10n.commonCancel),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: Text(l10n.commonDelete),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+  }
+
+  Future<void> _confirmReset() async {
+    final confirmed = await _showResetDialog();
+
+    if (!confirmed) return;
+
+    widget.onReset(_counter.id);
+    setState(() {
+      _counter = _counter.copyWith(startAt: DateTime.now());
+    });
   }
 
   Future<void> _confirmDelete() async {
-    final l10n = context.l10n;
+    final confirmed = await _showDeleteDialog();
 
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text(l10n.detailsDeleteDialogTitle),
-        content: Text(l10n.detailsDeleteDialogBody),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: Text(l10n.commonCancel),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: Text(l10n.commonDelete),
-          ),
-        ],
-      ),
-    );
+    if (!confirmed || !mounted) return;
 
-    if (confirmed == true && mounted) {
-      widget.onDelete(_counter.id);
-      Navigator.of(context).pop();
-    }
+    widget.onDelete(_counter.id);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -187,99 +200,29 @@ class _CounterDetailsScreenState extends State<CounterDetailsScreen> {
                     ),
                   ),
                   const SizedBox(height: 22),
-                  _InfoBlock(
+                  InfoBlock(
                     title: l10n.detailsStartDateTitle,
                     value: formatDateTime(localizedCounter.startAt, l10n),
                   ),
                   const SizedBox(height: 14),
-                  _InfoBlock(
+                  InfoBlock(
                     title: l10n.detailsReasonTitle,
                     value: localizedCounter.reason.isEmpty
                         ? l10n.detailsReasonEmpty
                         : localizedCounter.reason,
                   ),
                   const Spacer(),
-                  FilledButton(
-                    style: FilledButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                      backgroundColor: const Color(0xFF24A770),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(22),
-                      ),
-                    ),
-                    onPressed: _confirmReset,
-                    child: Text(
-                      l10n.detailsResetAction,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  TextButton(
-                    onPressed: _confirmDelete,
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    child: Text(
-                      l10n.detailsDeleteAction,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF9A5A5A),
-                      ),
-                    ),
+                  DestructiveActions(
+                    resetTitle: l10n.detailsResetAction,
+                    deleteTitle: l10n.detailsDeleteAction,
+                    onReset: _confirmReset,
+                    onDelete: _confirmDelete,
                   ),
                 ],
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _InfoBlock extends StatelessWidget {
-  final String title;
-  final String value;
-
-  const _InfoBlock({
-    required this.title,
-    required this.value,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: Colors.white.withValues(alpha: 0.22),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF748379),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 16,
-              height: 1.4,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF22312B),
-            ),
-          ),
-        ],
       ),
     );
   }
